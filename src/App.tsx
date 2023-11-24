@@ -1,24 +1,19 @@
-import { SignIn } from "./pages/SignIn/SignIn";
-import { SignUp } from "./pages/SignUp/SignUp";
-import { Dispatch, SetStateAction, useState } from "react";
-
-export interface SignUpTypes {
-  setIsSignUp: Dispatch<SetStateAction<boolean>>;
-}
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Chat from "./pages/Chat";
+import { Main } from "./pages/Main";
+import ErrorPage from "./ErrorPage";
 
 const App = () => {
-  const [isSignUp, setIsSignUp] = useState(false);
-
   return (
-    <div className="flex justify-center bg-gray-800">
-      <div className="w-full max-w-[1920px] h-full bg-cover bg-[url('./src/assets/backGround.jpg')]">
-        {isSignUp ? (
-          <SignIn setIsSignUp={setIsSignUp} />
-        ) : (
-          <SignUp setIsSignUp={setIsSignUp} />
-        )}
+    <BrowserRouter>
+      <div className="flex justify-center bg-gray-800 h-screen w-screen">
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
       </div>
-    </div>
+    </BrowserRouter>
   );
 };
 
