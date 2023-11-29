@@ -6,7 +6,7 @@ import { SignUpTypes } from "./SignUp";
 import { useNavigate } from "react-router-dom";
 import SocialLinks from "./SocialLinks";
 import { Input } from "./Input";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 
 export interface Link {
   name: string;
@@ -16,27 +16,11 @@ export interface Link {
 
 export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
   const navigate = useNavigate();
-  const [error, setError] = useState({ isError: false, message: "" });
+  const [error, setError] = useState("");
   const [userDetails, setUserDetails] = useState({
     email: "",
     password: "",
   });
-
-  const handleError = (errorMsg: string) => {
-    setError({
-      ...error,
-      isError: true,
-      message: errorMsg,
-    });
-
-    setTimeout(() => {
-      setError({
-        ...error,
-        isError: false,
-        message: "",
-      });
-    }, 3000);
-  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -49,34 +33,42 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/login",
-        {
-          ...userDetails,
+      const config = {
+        headers: {
+          "Content-type": "application/json",
         },
-        { withCredentials: true }
+      };
+
+      const { data } = await axios.post(
+        "http://localhost:4000/api/user/login",
+        { ...userDetails },
+        config
       );
-      console.log(data);
-      const { success, message } = data;
-      if (success) {
+
+      // on log in response : _id name, email, pic, token
+
+      const { _id } = data;
+
+      //  setting data to global state
+
+      if (_id) {
         setTimeout(() => {
           navigate("/chat");
         }, 1000);
-        setError({
-          ...error,
-          isError: false,
-          message: "",
-        });
-      } else {
-        handleError(message);
+        setError("");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err: unknown) {
+      if (isAxiosError(err)) {
+        setError(err.response?.data.message);
+      }
+      setTimeout(() => {
+        setError("");
+      }, 3000);
     }
     setUserDetails({
       ...userDetails,
-      email: "",
       password: "",
+      email: "",
     });
   };
 
@@ -142,10 +134,8 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
           </div>
         </form>
         <SocialLinks />
-        {error.isError === false ? null : (
-          <div className="bg-red-500 absolute top-1/2 r-1/2">
-            {error.message}
-          </div>
+        {!error ? null : (
+          <div className="bg-red-500 absolute top-1/2 r-1/2">{error}</div>
         )}
       </div>
     </>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Input } from "./Input";
 import { MouseEvent } from "react";
 import SocialLinks from "./SocialLinks";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 
 export interface SignUpTypes {
   setIsSignUp: Dispatch<SetStateAction<boolean>>;
@@ -24,29 +24,12 @@ export interface InputProps {
 }
 
 export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
-  const [error, setError] = useState({ isError: false, message: "" });
+  const [error, setError] = useState("");
   const [userDetails, setUserDetails] = useState({
-    username: "",
-    password: "",
     name: "",
-    surname: "",
+    password: "",
     email: "",
   });
-
-  const handleError = (errorMsg: string) => {
-    setError({
-      ...error,
-      isError: true,
-      message: errorMsg,
-    });
-    setTimeout(() => {
-      setError({
-        ...error,
-        isError: false,
-        message: "",
-      });
-    }, 3000);
-  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -60,45 +43,40 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/signup",
+        "http://localhost:4000/api/user/register",
         {
           ...userDetails,
-        },
-        { withCredentials: true }
+        }
       );
-      const { success, message } = data;
+      const { success } = data;
       if (success) {
         setTimeout(() => {
           setIsSignUp(false);
         }, 1000);
-        setError({
-          ...error,
-          isError: false,
-          message: "",
-        });
-      } else {
-        handleError(message);
-        console.log(message);
+        setError("");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err: unknown) {
+      if (isAxiosError(err)) {
+        setError(err.response?.data.message);
+      }
+      setTimeout(() => {
+        setError("");
+      }, 3000);
     }
     setUserDetails({
       ...userDetails,
-      username: "",
       password: "",
       name: "",
-      surname: "",
       email: "",
     });
   };
 
   const inputData = [
     {
-      labelText: "Username",
+      labelText: "Name Surname",
       type: "text",
-      maxLength: 20,
-      name: "username",
+      maxLength: 40,
+      name: "name",
     },
     {
       labelText: "Password",
@@ -113,20 +91,6 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
       maxLength: 40,
       name: "email",
     },
-
-    {
-      labelText: "Name",
-      type: "text",
-      maxLength: 20,
-      name: "name",
-    },
-
-    {
-      labelText: "Surname",
-      type: "text",
-      maxLength: 20,
-      name: "surname",
-    },
   ];
 
   return (
@@ -136,7 +100,7 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
         className="w-5/6 h-2/3 bg-slate-400 rounded-lg lg:w-[500px] lg:h-[600px] flex flex-col items-center justify-center"
       >
         <h1 className="text-2xl pb-2">Welcome to messageMe!</h1>
-        <h2 className=" pb-2">You can sign up here!</h2>
+        <h2 className="pb-2">You can sign up here!</h2>
         <div className="flex flex-col space-y-2">
           {inputData.map(({ labelText, type, maxLength, name }, i) => {
             return (
@@ -169,8 +133,8 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
         </div>
       </form>
       <SocialLinks />
-      {error.isError === false ? null : (
-        <div className="bg-red-500 absolute top-1/2 r-1/2">{error.message}</div>
+      {!error ? null : (
+        <div className="bg-red-500 absolute top-1/2 r-1/2">{error}</div>
       )}
     </div>
   );
