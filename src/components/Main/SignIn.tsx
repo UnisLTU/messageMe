@@ -1,20 +1,24 @@
 import { ChangeEvent, ReactNode } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { MouseEvent } from "react";
 import Logo1 from "../../assets/Logo.png";
 import { SignUpTypes } from "./SignUp";
 import { useNavigate } from "react-router-dom";
 import SocialLinks from "./SocialLinks";
 import { Input } from "./Input";
-import axios, { isAxiosError } from "axios";
+import { isAxiosError } from "axios";
+import DataContext, { DataContextProps } from "../../context/DataContext";
+import { ErrorModal } from "./ErrorModal";
+import { axiosSignIn } from "../../API";
 
-export interface Link {
+export interface LinkTypes {
   name: string;
   text: string;
   Icon: ReactNode;
 }
 
 export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
+  const { setUserData } = useContext(DataContext) as DataContextProps;
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [userDetails, setUserDetails] = useState({
@@ -30,31 +34,21 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
     });
   };
 
-  const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const fetchData = async () => {
     try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
+      const { data } = await axiosSignIn(userDetails);
+      const { success } = data;
 
-      const { data } = await axios.post(
-        "http://localhost:4000/api/user/login",
-        { ...userDetails },
-        config
-      );
-
-      // on log in response : _id name, email, pic, token
-
-      const { _id } = data;
-
-      //  setting data to global state
-
-      if (_id) {
+      if (success) {
+        const dataString = JSON.stringify(data);
+        // Store the JSON string in localStorage
+        localStorage.setItem("userData", dataString);
+        //navigates to "/chat"
+        setUserData(data);
         setTimeout(() => {
           navigate("/chat");
         }, 1000);
+
         setError("");
       }
     } catch (err: unknown) {
@@ -63,8 +57,12 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
       }
       setTimeout(() => {
         setError("");
-      }, 3000);
+      }, 10000);
     }
+  };
+  const handleSignIn = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    fetchData();
     setUserDetails({
       ...userDetails,
       password: "",
@@ -92,10 +90,7 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
   return (
     <>
       <div className="h-screen w-full flex justify-center items-center flex-col">
-        <form
-          onSubmit={() => handleSubmit}
-          className="w-5/6 h-2/3 bg-slate-400 shadow-md rounded-lg lg:w-[500px] lg:h-[600px] flex flex-col items-center justify-center"
-        >
+        <form className="w-5/6 h-2/3 bg-slate-400 shadow-md rounded-lg lg:w-[500px] lg:h-[600px] flex flex-col items-center justify-center">
           <img
             src={Logo1}
             alt="logo"
@@ -116,15 +111,16 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
               );
             }
           )}
+          {!error ? <div className="h-8"></div> : <ErrorModal error={error} />}
           <button
-            className="w-64 h-12 rounded-lg mt-8 bg-gray-700 flex items-center justify-center font-bold text-lg text-slate-200"
+            className="w-64 h-12 rounded-lg bg-gray-700 flex items-center justify-center font-bold text-lg text-slate-200"
             type="button"
-            onClick={(e) => handleSubmit(e)}
+            onClick={(e) => handleSignIn(e)}
           >
             Sign In
           </button>
           <div className="flex flex-row mt-3 space-x-2">
-            <p>Dont have account?</p>
+            <p>Don't have account?</p>
             <button
               onClick={() => setIsSignUp(true)}
               className="text-cyan-800 hover:underline"
@@ -134,9 +130,6 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
           </div>
         </form>
         <SocialLinks />
-        {!error ? null : (
-          <div className="bg-red-500 absolute top-1/2 r-1/2">{error}</div>
-        )}
       </div>
     </>
   );
