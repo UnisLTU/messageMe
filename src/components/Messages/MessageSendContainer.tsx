@@ -1,27 +1,24 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useContext } from "react";
 import { LuSend } from "react-icons/lu";
 import { axiosSendMessage } from "../../API";
 import { isAxiosError } from "axios";
 import { MessageTypes } from "./AllMessagesContainer";
+import DataContext, { DataContextProps } from "../../context/DataContext";
 
 interface MessageSendContainerProps {
-  selectedId: string;
   setMessages: Dispatch<SetStateAction<MessageTypes[]>>;
 }
 
 export interface MessageToSendTypes {
   content: string;
-  chatId: string;
+  selectedChatId: string;
 }
 
-const MessageSendContainer = ({
-  selectedId,
-  setMessages,
-}: MessageSendContainerProps) => {
+const MessageSendContainer = ({ setMessages }: MessageSendContainerProps) => {
+  const { selectedChatId } = useContext(DataContext) as DataContextProps;
   const [content, setContent] = useState("");
 
-  const chatId = selectedId;
-  const messageToSend: MessageToSendTypes = { content, chatId };
+  const messageToSend: MessageToSendTypes = { content, selectedChatId };
 
   const sendMessage = async () => {
     try {

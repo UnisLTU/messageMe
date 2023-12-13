@@ -1,4 +1,4 @@
-import { useContext, SetStateAction, Dispatch } from "react";
+import { useContext } from "react";
 import DataContext, {
   ChatDataTypes,
   DataContextProps,
@@ -7,24 +7,16 @@ import { SendersInfo } from "../../utils/SendersInfo";
 
 export interface ChatBannerProps {
   chat: ChatDataTypes;
-  selectedId: string;
-  setSelectedId: Dispatch<SetStateAction<string>>;
 }
 
 export interface SendersInfoTypes {
   senderPic: string | undefined;
   senderName: string | undefined;
-  // other properties...
 }
 
-export const ChatListItem = ({
-  chat,
-  selectedId,
-  setSelectedId,
-}: ChatBannerProps) => {
-  const { userData, setSelectedChat } = useContext(
-    DataContext
-  ) as DataContextProps;
+export const ChatListItem = ({ chat }: ChatBannerProps) => {
+  const { userData, setSelectedChatUser, selectedChatId, setSelectedChatId } =
+    useContext(DataContext) as DataContextProps;
 
   const sendersInfo = SendersInfo(userData, chat);
 
@@ -34,12 +26,12 @@ export const ChatListItem = ({
   const latestMessage = chat.latestMessage?.content;
 
   const handleAccess = async () => {
-    setSelectedId(chatId);
-    setSelectedChat(() => sendersInfo);
+    setSelectedChatId(chatId);
+    setSelectedChatUser(() => sendersInfo);
   };
 
   const background =
-    selectedId === chatId
+    selectedChatId === chatId
       ? "bg-slate-200 border-2 border-slate-400"
       : "bg-slate-50";
 

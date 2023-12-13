@@ -2,9 +2,9 @@ import DataContext, { DataContextProps } from "../../context/DataContext";
 import { useContext } from "react";
 
 export const ChatName = () => {
-  const { selectedChat } = useContext(DataContext) as DataContextProps;
+  const { selectedChatUser } = useContext(DataContext) as DataContextProps;
 
-  const { senderName, senderPic } = selectedChat;
+  const { senderName, senderPic } = selectedChatUser;
 
   return (
     <div className="bg-slate-200 rounded-xl h-24 w-full flex flex-row items-center">

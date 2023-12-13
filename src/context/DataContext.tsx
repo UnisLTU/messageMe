@@ -1,5 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 import { SendersInfoTypes } from "../components/Chat/ChatListItem";
+import { ModalsEnum } from "../pages/Chat";
 
 export interface UserDataTypes {
   _id?: string;
@@ -29,8 +30,14 @@ export interface DataContextProps {
   setUserData: Dispatch<SetStateAction<UserDataTypes | undefined>>;
   chats: ChatDataTypes[];
   setChats: Dispatch<SetStateAction<ChatDataTypes[]>>;
-  selectedChat: SendersInfoTypes;
-  setSelectedChat: Dispatch<SetStateAction<SendersInfoTypes>>;
+  selectedChatUser: SendersInfoTypes;
+  setSelectedChatUser: Dispatch<SetStateAction<SendersInfoTypes>>;
+  isMobile: boolean;
+  setIsMobile: Dispatch<SetStateAction<boolean>>;
+  selectedChatId: string;
+  setSelectedChatId: Dispatch<SetStateAction<string>>;
+  modal: string;
+  setModal: Dispatch<SetStateAction<ModalsEnum>>;
 }
 
 const DataContext = createContext<DataContextProps | undefined>(undefined);
