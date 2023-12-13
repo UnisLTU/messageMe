@@ -1,14 +1,24 @@
+import NewPersonalChatModal from "../components/Modals/NewPersonalChatModal";
 import DataContext, { DataContextProps } from "../context/DataContext";
-import ChatDesktop from "../components/Chat/ChatDesktop";
+import ChatDesktop from "../components/Chat/ChatDesktop/ChatDesktop";
+import SettingsModal from "../components/Modals/SettingsModal";
+import ChatMobile from "../components/Chat/ChatMobile";
 import { useContext, useEffect } from "react";
 import { axiosFetchChats } from "../API";
 import { isAxiosError } from "axios";
-import { useState, useCallback } from "react";
-import ChatMobile from "../components/Chat/ChatMobile";
+
+export enum ModalsEnum {
+  SETTINGS = "settings",
+  NEW_PERSONAL_CHAT = "newPersonalChat",
+  NEW_GROUP_CHAT = "newGroupChat",
+  CHAT = "chat",
+  NOT_SHOW = "",
+}
 
 const Chat = () => {
-  const { userData, setChats } = useContext(DataContext) as DataContextProps;
-  const [isMobile, setIsMobile] = useState(false);
+  const { userData, setChats, setIsMobile, isMobile, modal } = useContext(
+    DataContext
+  ) as DataContextProps;
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -26,19 +36,44 @@ const Chat = () => {
     if (userData) fetchChats();
   }, [userData]);
 
-  const handleWindowResize = useCallback(() => {
-    if (window.innerWidth > 768 && isMobile) setIsMobile(false);
-    if (window.innerWidth < 768 && !isMobile) setIsMobile(true);
-  }, [isMobile]);
+  const modalView = () => {
+    switch (modal) {
+      case ModalsEnum.NEW_PERSONAL_CHAT:
+        return <NewPersonalChatModal />;
+      case ModalsEnum.SETTINGS:
+        return <SettingsModal />;
+      case ModalsEnum.NEW_GROUP_CHAT:
+        return <NewPersonalChatModal />;
+      case ModalsEnum.CHAT:
+        return <NewPersonalChatModal />;
+      default:
+        return null;
+    }
+  };
+
+  // const groupChats: ChatData[] =
+  //   chats?.filter(({ isGroupChat }) => isGroupChat) || [];
 
   useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
+    const handleWindowResize = () => {
+      if (window.innerWidth > 820 && isMobile) setIsMobile(false);
+      if (window.innerWidth < 820 && !isMobile) setIsMobile(true);
     };
-  }, [window.innerWidth]);
+    handleWindowResize();
+  }, []);
 
-  return <>{isMobile ? <ChatMobile /> : <ChatDesktop />}</>;
+  return (
+    <>
+      {isMobile ? (
+        <ChatMobile />
+      ) : (
+        <>
+          <ChatDesktop />
+        </>
+      )}
+      {modalView()}
+    </>
+  );
 };
 
 export default Chat;

@@ -1,25 +1,31 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useContext, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import SearchDropDown from "../Chat/SearchDropDown";
 import { axiosCreateOrAccess } from "../../API";
 import { isAxiosError } from "axios";
-import { ChatDataTypes, UserDataTypes } from "../../context/DataContext";
-import { ModalsEnum } from "../Chat/ChatDesktop";
-
-interface PersonalModalProps {
-  createNewPersonalChat: (data: ChatDataTypes) => void;
-  setModal: Dispatch<SetStateAction<ModalsEnum>>;
-}
+import DataContext, {
+  ChatDataTypes,
+  DataContextProps,
+  UserDataTypes,
+} from "../../context/DataContext";
+import { ModalsEnum } from "../../pages/Chat";
+import { SendersInfo } from "../../utils/SendersInfo";
 
 export interface UserIdTypes {
   userId: string | undefined;
 }
 
-const NewPersonalChatModal = ({
-  createNewPersonalChat,
-  setModal,
-}: PersonalModalProps) => {
+const NewPersonalChatModal = () => {
   const [selectedUser, setSelectedUser] = useState<UserDataTypes | undefined>();
+
+  const {
+    chats,
+    setChats,
+    userData,
+    setSelectedChatUser,
+    setSelectedChatId,
+    setModal,
+  } = useContext(DataContext) as DataContextProps;
 
   const userId: UserIdTypes = { userId: selectedUser?._id };
 
@@ -27,6 +33,22 @@ const NewPersonalChatModal = ({
     try {
       const { data } = await axiosCreateOrAccess(userId);
       if (data) {
+        const createNewPersonalChat = (newChat: ChatDataTypes) => {
+          const doesChatExist = chats.some((item) => item._id === newChat._id);
+          const sender = SendersInfo(userData, newChat);
+
+          if (doesChatExist) {
+            setSelectedChatUser(sender);
+            setSelectedChatId(newChat._id);
+            setModal(ModalsEnum.NOT_SHOW);
+            return;
+          } else {
+            setChats((prevChats) => [newChat, ...prevChats]);
+            setSelectedChatUser(sender);
+            setSelectedChatId(newChat._id);
+            setModal(ModalsEnum.NOT_SHOW);
+          }
+        };
         createNewPersonalChat(data);
       }
     } catch (err: unknown) {
