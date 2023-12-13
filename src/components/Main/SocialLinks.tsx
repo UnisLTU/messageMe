@@ -10,7 +10,7 @@ const SocialLinks = () => {
     },
     {
       name: "LinkedIn:",
-      text: "https://github.com/UnisLTU",
+      text: "linkedin.com/in/ugnius-tyla-9083a1132",
       icon: <FiLinkedin size={40} />,
     },
     {

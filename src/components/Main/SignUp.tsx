@@ -1,18 +1,15 @@
-import { ChangeEvent, Dispatch, ReactNode, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import { Input } from "./Input";
 import { MouseEvent } from "react";
 import SocialLinks from "./SocialLinks";
-import axios, { isAxiosError } from "axios";
+import { ErrorModal } from "./ErrorModal";
+
+import { isAxiosError } from "axios";
+import { axiosSignUp } from "../../API";
 
 export interface SignUpTypes {
   setIsSignUp: Dispatch<SetStateAction<boolean>>;
-}
-
-export interface Link {
-  name: string;
-  text: string;
-  Icon: ReactNode;
 }
 
 export interface InputProps {
@@ -42,17 +39,10 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/api/user/register",
-        {
-          ...userDetails,
-        }
-      );
+      const { data } = await axiosSignUp(userDetails);
       const { success } = data;
       if (success) {
-        setTimeout(() => {
-          setIsSignUp(false);
-        }, 1000);
+        setIsSignUp(false);
         setError("");
       }
     } catch (err: unknown) {
@@ -61,7 +51,7 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
       }
       setTimeout(() => {
         setError("");
-      }, 3000);
+      }, 10000);
     }
     setUserDetails({
       ...userDetails,
@@ -115,9 +105,10 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
             );
           })}
         </div>
+        {!error ? <div className="h-8"></div> : <ErrorModal error={error} />}
         <button
           onClick={(e) => handleSubmit(e)}
-          className="w-64 h-12 rounded-lg mt-4 bg-gray-700 flex items-center justify-center font-bold text-lg text-slate-200"
+          className="w-64 h-12 rounded-lg bg-gray-700 flex items-center justify-center font-bold text-lg text-slate-200"
           type="button"
         >
           Sign up
@@ -133,9 +124,6 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
         </div>
       </form>
       <SocialLinks />
-      {!error ? null : (
-        <div className="bg-red-500 absolute top-1/2 r-1/2">{error}</div>
-      )}
     </div>
   );
 };

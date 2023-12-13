@@ -1,22 +1,44 @@
-import { useCallback, useEffect, useState } from "react";
+import DataContext, { DataContextProps } from "../context/DataContext";
 import ChatDesktop from "../components/Chat/ChatDesktop";
+import { useContext, useEffect } from "react";
+import { axiosFetchChats } from "../API";
+import { isAxiosError } from "axios";
+import { useState, useCallback } from "react";
 import ChatMobile from "../components/Chat/ChatMobile";
 
 const Chat = () => {
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const { userData, setChats } = useContext(DataContext) as DataContextProps;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const fetchChats = async () => {
+      try {
+        const { data } = await axiosFetchChats();
+
+        setChats(data);
+      } catch (err) {
+        if (isAxiosError(err)) {
+          console.log(err);
+        }
+      }
+    };
+
+    if (userData) fetchChats();
+  }, [userData]);
 
   const handleWindowResize = useCallback(() => {
-    setWindowSize(window.innerWidth);
-  }, []);
+    if (window.innerWidth > 768 && isMobile) setIsMobile(false);
+    if (window.innerWidth < 768 && !isMobile) setIsMobile(true);
+  }, [isMobile]);
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
-  }, [handleWindowResize]);
+  }, [window.innerWidth]);
 
-  return <>{windowSize > 768 ? <ChatDesktop /> : <ChatMobile />}</>;
+  return <>{isMobile ? <ChatMobile /> : <ChatDesktop />}</>;
 };
 
 export default Chat;

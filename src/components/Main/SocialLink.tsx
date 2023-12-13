@@ -1,6 +1,6 @@
-import { Link } from "./SignIn";
+import { LinkTypes } from "./SignIn";
 
-export const SocialLink = ({ name, text, Icon }: Link) => {
+export const SocialLink = ({ name, text, Icon }: LinkTypes) => {
   return (
     <a
       href={text}

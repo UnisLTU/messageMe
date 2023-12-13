@@ -5,11 +5,6 @@ import {
 } from "react-icons/io5";
 import { SlPlus } from "react-icons/sl";
 import { Link } from "react-router-dom";
-import { ChatBanner } from "./ChatBanner";
-
-export interface ChatBannerProps {
-  name: string;
-}
 
 const ChatMobile = () => {
   return (
@@ -30,18 +25,14 @@ const ChatMobile = () => {
             <SlPlus size={20} />
           </button>
         </div>
-        <div className="space-y-4 overflow-scroll h-1/2">
-          <ChatBanner name={"Ugnius Tyla"} />
-        </div>
+        <div className="space-y-4 overflow-scroll h-1/2"></div>
         <div className="flex flex-row justify-between px-4 items-center">
           <h1>Group chats</h1>
           <button type="button">
             <SlPlus size={20} />
           </button>
         </div>
-        <div className="space-y-4 overflow-scroll h-1/2">
-          <ChatBanner name={"VCS2023"} />
-        </div>
+        <div className="space-y-4 overflow-scroll h-1/2"></div>
       </div>
       <nav className="w-full  bg-slate-200 flex-1 flex flex-row justify-around items-center">
         <Link className="w-1/3 h-full justify-center flex items-center" to="#">
