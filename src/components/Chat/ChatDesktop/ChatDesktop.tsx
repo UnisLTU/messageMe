@@ -23,7 +23,7 @@ const ChatDesktop = () => {
     <>
       <div className="flex flex-col flex-none max-w-[1920px] w-full bg-slate-400 h-screen p-10">
         <div className="max-w-full shadow-md bg-slate-200 rounded-xl p-8 flex flex-row space-x-4 max-h-full min-h-full">
-          <Navigation setModal={setModal} />
+          <Navigation />
           <div className="w-full space-y-4 h-full flex flex-col">
             <div className="w-full h-full space-x-4 flex flex-row">
               <div className="w-1/2">

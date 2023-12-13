@@ -49,7 +49,7 @@ const ChatMobile = () => {
           </div>
         </div>
       </div>
-      <Navigation setModal={setModal} />
+      <Navigation />
     </div>
   );
 };

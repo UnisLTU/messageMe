@@ -2,15 +2,10 @@ import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import DataContext, { DataContextProps } from "../../../context/DataContext";
-import { Dispatch, SetStateAction } from "react";
 import { ModalsEnum } from "../../../pages/Chat";
 
-interface NavigationProps {
-  setModal: Dispatch<SetStateAction<ModalsEnum>>;
-}
-
-export const Navigation = ({ setModal }: NavigationProps) => {
-  const { userData } = useContext(DataContext) as DataContextProps;
+export const Navigation = () => {
+  const { userData, setModal } = useContext(DataContext) as DataContextProps;
 
   return (
     <div className="md:w-[10%] md:rounded-xl md:h-full md:flex-col w-full min-h-fit bg-slate-50 flex flex-row text-center items-center justify-around">
