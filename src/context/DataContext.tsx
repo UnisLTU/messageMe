@@ -17,7 +17,7 @@ export interface ChatDataTypes {
   isGroupChat: boolean;
   updatedAt: string;
   latestMessage: LatestMessageTypes;
-  users: UserDataTypes;
+  users: UserDataTypes[];
 }
 
 export interface LatestMessageTypes {

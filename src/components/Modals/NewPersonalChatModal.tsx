@@ -11,13 +11,17 @@ interface PersonalModalProps {
   setModal: Dispatch<SetStateAction<ModalsEnum>>;
 }
 
+export interface UserIdTypes {
+  userId: string | undefined;
+}
+
 const NewPersonalChatModal = ({
   createNewPersonalChat,
   setModal,
 }: PersonalModalProps) => {
   const [selectedUser, setSelectedUser] = useState<UserDataTypes | undefined>();
 
-  const userId = { userId: selectedUser?._id };
+  const userId: UserIdTypes = { userId: selectedUser?._id };
 
   const handleNewChat = async () => {
     try {

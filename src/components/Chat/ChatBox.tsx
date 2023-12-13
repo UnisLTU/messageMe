@@ -3,7 +3,7 @@ import { ChatName } from "./ChatName";
 import { isAxiosError } from "axios";
 import { axiosAllMessages } from "../../API";
 import SVG from "../../assets/undraw_duplicate_re_d39g.svg";
-import { Message } from "../Messages/AllMessagesContainer";
+import { MessageTypes } from "../Messages/AllMessagesContainer";
 import AllMessagesContainer from "../Messages/AllMessagesContainer";
 import MessageSendContainer from "../Messages/MessageSendContainer";
 
@@ -12,7 +12,7 @@ interface ChatBoxProps {
 }
 
 const ChatBox = ({ selectedId }: ChatBoxProps) => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<MessageTypes[]>([]);
 
   useEffect(() => {
     const allMessages = async () => {

@@ -12,8 +12,9 @@ export interface ChatBannerProps {
 }
 
 export interface SendersInfoTypes {
-  senderPic?: string;
-  senderName?: string;
+  senderPic: string | undefined;
+  senderName: string | undefined;
+  // other properties...
 }
 
 export const ChatListItem = ({
@@ -29,12 +30,12 @@ export const ChatListItem = ({
 
   const { senderPic, senderName } = sendersInfo;
 
-  const chatId: string = chat._id;
+  const chatId = chat._id;
   const latestMessage = chat.latestMessage?.content;
 
   const handleAccess = async () => {
     setSelectedId(chatId);
-    setSelectedChat(sendersInfo);
+    setSelectedChat(() => sendersInfo);
   };
 
   const background =
