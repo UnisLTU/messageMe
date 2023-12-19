@@ -38,6 +38,10 @@ export interface DataContextProps {
   setSelectedChatId: Dispatch<SetStateAction<string>>;
   modal: string;
   setModal: Dispatch<SetStateAction<ModalsEnum>>;
+  isGroupChat: boolean;
+  setIsGroupChat: Dispatch<SetStateAction<boolean>>;
+  groupChatName: string;
+  setGroupChatName: Dispatch<SetStateAction<string>>;
 }
 
 const DataContext = createContext<DataContextProps | undefined>(undefined);

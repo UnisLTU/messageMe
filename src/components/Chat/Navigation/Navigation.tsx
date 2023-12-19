@@ -8,7 +8,7 @@ export const Navigation = () => {
   const { userData, setModal } = useContext(DataContext) as DataContextProps;
 
   return (
-    <div className="md:w-[10%] md:rounded-xl md:h-full md:flex-col w-full min-h-fit bg-slate-50 flex flex-row text-center items-center justify-around">
+    <div className="md:w-[10%] md:rounded-xl md:h-full md:flex-col md:relative absolute bottom-0 w-full min-h-fit bg-slate-50 flex flex-row text-center items-center justify-around">
       <div className="md:flex flex-col hidden items-center space-y-2">
         <img
           className="bg-slate-800 h-20 w-20 rounded-full border-blue-400 border-4"
@@ -18,7 +18,7 @@ export const Navigation = () => {
         <h1 className="font-bold text-xl break-words">{userData?.name}</h1>
       </div>
       <div
-        className="h-24 w-24   flex flex-col items-center justify-center"
+        className="h-24 w-24 flex flex-col items-center justify-center"
         onClick={() => setModal(ModalsEnum.SETTINGS)}
       >
         <IoSettingsOutline size={32} />

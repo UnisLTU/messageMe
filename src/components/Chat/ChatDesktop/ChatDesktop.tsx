@@ -50,25 +50,27 @@ const ChatDesktop = () => {
                     )}
                   </div>
                 </div>
-                <div className="h-1/2 w-full">
+                <div className="h-1/2 w-full pb-10">
                   <div className="w-full pb-4 flex flex-row justify-between">
-                    <h1>Group chats:</h1>
+                    <h1>Personal chats</h1>
                     <button className="flex flex-row space-x-2" type="button">
-                      <h1>Start new group chat</h1>
+                      <h1>Start new chat</h1>
                       <SlPlus
-                        onClick={() => setModal(ModalsEnum.NEW_GROUP_CHAT)}
+                        onClick={() => setModal(ModalsEnum.NEW_PERSONAL_CHAT)}
                         size={24}
                       />
                     </button>
                   </div>
                   <div className="h-full w-full overflow-y-scroll no-scrollbar space-y-4">
-                    {/*chats ? {groupChats.map((chat) => 
-                    return (
-                      <GroupChatBanner
-                        key={chat._id} chat={chat}
-                      />
-                    );
-                  ) : (<div>Loading</div>)} */}
+                    {chats ? (
+                      chats
+                        .filter(({ isGroupChat }) => isGroupChat)
+                        .map((chat) => (
+                          <ChatListItem key={chat._id} chat={chat} />
+                        ))
+                    ) : (
+                      <div>Loading</div>
+                    )}
                   </div>
                 </div>
               </div>

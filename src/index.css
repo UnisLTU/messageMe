@@ -11,3 +11,9 @@
     scrollbar-width: none;
   }
 }
+
+@layer base {
+  body {
+    box-sizing: border-box;
+  }
+}

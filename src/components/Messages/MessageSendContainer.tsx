@@ -11,14 +11,16 @@ interface MessageSendContainerProps {
 
 export interface MessageToSendTypes {
   content: string;
-  selectedChatId: string;
+  chatId: string;
 }
 
 const MessageSendContainer = ({ setMessages }: MessageSendContainerProps) => {
   const { selectedChatId } = useContext(DataContext) as DataContextProps;
   const [content, setContent] = useState("");
 
-  const messageToSend: MessageToSendTypes = { content, selectedChatId };
+  const chatId = selectedChatId;
+
+  const messageToSend: MessageToSendTypes = { content, chatId };
 
   const sendMessage = async () => {
     try {

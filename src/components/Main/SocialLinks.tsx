@@ -20,7 +20,7 @@ const SocialLinks = () => {
     },
   ];
   return (
-    <div className="flex flex-col mt-6 space-y-6  lg:flex-row lg:space-y-0 lg:space-x-11 ">
+    <div className="flex flex-col mt-6 space-y-6  md:flex-row md:space-y-0 md:space-x-11 ">
       {socialLinks.map(({ name, text, icon }, i) => {
         return <SocialLink key={i} name={name} text={text} Icon={icon} />;
       })}

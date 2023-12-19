@@ -90,13 +90,13 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
   return (
     <>
       <div className="h-screen w-full flex justify-center items-center flex-col">
-        <form className="w-5/6 h-2/3 bg-slate-400 shadow-md rounded-lg lg:w-[500px] lg:h-[600px] flex flex-col items-center justify-center">
+        <form className="w-5/6 h-2/3 bg-slate-400 shadow-md rounded-lg md:w-[500px] md:h-[600px] flex flex-col items-center justify-center">
           <img
             src={Logo1}
             alt="logo"
-            className="w-28 h-28 rounded-lg mb-2 lg:mb-4 shadow-inner"
+            className="w-28 h-28 rounded-lg mb-2 md:mb-4 shadow-inner"
           />
-          <h1 className="mb-2 lg:mb-4">Sign in to messageMe!</h1>
+          <h1 className="mb-2 md:mb-4">Sign in to messageMe!</h1>
           {inputData.map(
             ({ labelText, type, handleChange, maxLength, name }, i) => {
               return (
