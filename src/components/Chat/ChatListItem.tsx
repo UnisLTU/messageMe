@@ -61,7 +61,7 @@ export const ChatListItem = ({ chat }: ChatBannerProps) => {
       className={`${background} rounded-xl h-16 shadow-md flex items-center flex-row space-x-4`}
     >
       <img
-        className="bg-red-400 w-6 h-6 rounded-full ml-4"
+        className="w-6 h-6 bg-blue-400 rounded-full ml-4"
         src={isGroup ? "" : senderPic}
         alt=""
       />

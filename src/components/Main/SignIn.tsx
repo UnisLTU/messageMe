@@ -37,6 +37,18 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
   const fetchData = async () => {
     try {
       const { data } = await axiosSignIn(userDetails);
+
+      /* response 
+      {
+          "_id": "string",
+          "name": "string",
+          "email": "string",
+          "pic": "string",
+          "token": "string",
+          "success": boolean 
+      } 
+      */
+
       const { success } = data;
 
       if (success) {

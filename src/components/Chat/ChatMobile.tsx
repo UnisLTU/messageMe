@@ -40,7 +40,7 @@ const ChatMobile = () => {
             <button className="flex flex-row space-x-2" type="button">
               <h1>Start new chat</h1>
               <SlPlus
-                onClick={() => setModal(ModalsEnum.NEW_PERSONAL_CHAT)}
+                onClick={() => setModal(ModalsEnum.NEW_GROUP_CHAT)}
                 size={24}
               />
             </button>

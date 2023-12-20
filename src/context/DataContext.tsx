@@ -42,6 +42,8 @@ export interface DataContextProps {
   setIsGroupChat: Dispatch<SetStateAction<boolean>>;
   groupChatName: string;
   setGroupChatName: Dispatch<SetStateAction<string>>;
+  refetch: boolean;
+  setRefetch: Dispatch<SetStateAction<boolean>>;
 }
 
 const DataContext = createContext<DataContextProps | undefined>(undefined);

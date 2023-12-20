@@ -52,11 +52,11 @@ const ChatDesktop = () => {
                 </div>
                 <div className="h-1/2 w-full pb-10">
                   <div className="w-full pb-4 flex flex-row justify-between">
-                    <h1>Personal chats</h1>
+                    <h1>Group chats</h1>
                     <button className="flex flex-row space-x-2" type="button">
                       <h1>Start new chat</h1>
                       <SlPlus
-                        onClick={() => setModal(ModalsEnum.NEW_PERSONAL_CHAT)}
+                        onClick={() => setModal(ModalsEnum.NEW_GROUP_CHAT)}
                         size={24}
                       />
                     </button>

@@ -11,6 +11,7 @@ import DataContext, { DataContextProps } from "../../context/DataContext";
 const ChatBox = () => {
   const { selectedChatId } = useContext(DataContext) as DataContextProps;
   const [messages, setMessages] = useState<MessageTypes[]>([]);
+  const { refetch } = useContext(DataContext) as DataContextProps;
 
   useEffect(() => {
     const allMessages = async () => {
@@ -25,7 +26,7 @@ const ChatBox = () => {
     };
 
     if (selectedChatId) allMessages();
-  }, [selectedChatId]);
+  }, [selectedChatId, refetch]);
 
   return (
     <>
