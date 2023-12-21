@@ -6,8 +6,11 @@ import ChatMobile from "../components/Chat/ChatMobile";
 import { useContext, useEffect } from "react";
 import { axiosFetchChats } from "../API";
 import { isAxiosError } from "axios";
+<<<<<<< HEAD
 import ChatBoxModal from "../components/Modals/ChatBoxModal";
 import NewGroupChatModal from "../components/Modals/NewGroupChatModal";
+=======
+>>>>>>> master
 
 export enum ModalsEnum {
   SETTINGS = "settings",
@@ -18,8 +21,14 @@ export enum ModalsEnum {
 }
 
 const Chat = () => {
+<<<<<<< HEAD
   const { userData, setChats, setIsMobile, isMobile, modal, refetch } =
     useContext(DataContext) as DataContextProps;
+=======
+  const { userData, setChats, setIsMobile, isMobile, modal } = useContext(
+    DataContext
+  ) as DataContextProps;
+>>>>>>> master
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -68,7 +77,8 @@ const Chat = () => {
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
-  }, [window.innerWidth]);
+    handleWindowResize();
+  }, []);
 
   return (
     <>

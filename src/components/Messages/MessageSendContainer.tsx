@@ -19,7 +19,7 @@ interface MessageSendContainerProps {
 
 export interface MessageToSendTypes {
   content: string;
-  chatId: string;
+  selectedChatId: string;
 }
 
 const MessageSendContainer = ({ setMessages }: MessageSendContainerProps) => {
