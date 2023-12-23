@@ -87,7 +87,7 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
     <div className="h-screen w-full flex justify-center items-center flex-col">
       <form
         onSubmit={() => handleSubmit}
-        className="w-5/6 h-2/3 bg-slate-400 rounded-lg lg:w-[500px] lg:h-[600px] flex flex-col items-center justify-center"
+        className="w-5/6 h-2/3 bg-slate-400 rounded-lg md:w-[500px] md:h-[600px] flex flex-col items-center justify-center"
       >
         <h1 className="text-2xl pb-2">Welcome to messageMe!</h1>
         <h2 className="pb-2">You can sign up here!</h2>

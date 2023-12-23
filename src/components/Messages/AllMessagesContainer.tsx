@@ -23,7 +23,7 @@ const AllMessagesContainer = ({ messages }: AllMessagesProps) => {
   }, [messages]);
 
   return (
-    <div className="flex flex-col overflow-scroll no-scrollbar space-y-2">
+    <div className="flex h-full flex-col overflow-scroll no-scrollbar space-y-2">
       {messages.map((message) => (
         <Message key={message._id} message={message} />
       ))}

@@ -16,6 +16,9 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedChatId, setSelectedChatId] = useState("");
   const [modal, setModal] = useState(ModalsEnum.NOT_SHOW);
+  const [isGroupChat, setIsGroupChat] = useState(false);
+  const [groupChatName, setGroupChatName] = useState("");
+  const [refetch, setRefetch] = useState(true);
 
   useEffect(() => {
     const storageUser = localStorage.getItem("userData");
@@ -42,6 +45,12 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
         setSelectedChatId,
         modal,
         setModal,
+        isGroupChat,
+        setIsGroupChat,
+        groupChatName,
+        setGroupChatName,
+        refetch,
+        setRefetch,
       }}
     >
       {children}

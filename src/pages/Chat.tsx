@@ -6,6 +6,8 @@ import ChatMobile from "../components/Chat/ChatMobile";
 import { useContext, useEffect } from "react";
 import { axiosFetchChats } from "../API";
 import { isAxiosError } from "axios";
+import ChatBoxModal from "../components/Modals/ChatBoxModal";
+import NewGroupChatModal from "../components/Modals/NewGroupChatModal";
 
 export enum ModalsEnum {
   SETTINGS = "settings",
@@ -16,9 +18,8 @@ export enum ModalsEnum {
 }
 
 const Chat = () => {
-  const { userData, setChats, setIsMobile, isMobile, modal } = useContext(
-    DataContext
-  ) as DataContextProps;
+  const { userData, setChats, setIsMobile, isMobile, modal, refetch } =
+    useContext(DataContext) as DataContextProps;
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -34,7 +35,7 @@ const Chat = () => {
     };
 
     if (userData) fetchChats();
-  }, [userData]);
+  }, [userData, refetch]);
 
   const modalView = () => {
     switch (modal) {
@@ -43,9 +44,9 @@ const Chat = () => {
       case ModalsEnum.SETTINGS:
         return <SettingsModal />;
       case ModalsEnum.NEW_GROUP_CHAT:
-        return <NewPersonalChatModal />;
+        return <NewGroupChatModal />;
       case ModalsEnum.CHAT:
-        return <NewPersonalChatModal />;
+        return <ChatBoxModal />;
       default:
         return null;
     }
@@ -56,8 +57,16 @@ const Chat = () => {
 
   useEffect(() => {
     const handleWindowResize = () => {
-      if (window.innerWidth > 820 && isMobile) setIsMobile(false);
-      if (window.innerWidth < 820 && !isMobile) setIsMobile(true);
+      if (window.innerWidth > 880) setIsMobile(false);
+      if (window.innerWidth < 880) setIsMobile(true);
+    };
+
+    handleWindowResize();
+
+    window.addEventListener("resize", handleWindowResize);
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
     };
     handleWindowResize();
   }, []);

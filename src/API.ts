@@ -2,6 +2,7 @@ import axios from "axios";
 import { UserDataTypes } from "./context/DataContext";
 import { MessageToSendTypes } from "./components/Messages/MessageSendContainer";
 import { UserIdTypes } from "./components/Modals/NewPersonalChatModal";
+import { newChatDataTypes } from "./components/Modals/NewGroupChatModal";
 
 const api = axios.create({
   baseURL: "http://localhost:4000/api/", //API base URL
@@ -47,6 +48,11 @@ export const axiosFetchChats = () => {
 //send new messagae
 export const axiosCreateOrAccess = (data: UserIdTypes) => {
   return api.post("/chat", { ...data });
+};
+
+//send new messagae
+export const axiosCreateGroupChat = (data: newChatDataTypes) => {
+  return api.post("/chat/creategroup", { ...data });
 };
 
 //get chat with id? messages
