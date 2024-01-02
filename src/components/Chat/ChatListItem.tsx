@@ -1,18 +1,14 @@
 import { useContext } from "react";
-import DataContext, {
-  ChatDataTypes,
-  DataContextProps,
-} from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
 import { SendersInfo } from "../../utils/SendersInfo";
 import { ModalsEnum } from "../../pages/Chat";
+import io from "socket.io-client";
+import { DataContextProps } from "../../types/common";
+import { ChatDataTypes } from "../../types/ChatTypes";
+export const socket = io("http://localhost:4000");
 
-export interface ChatBannerProps {
+interface ChatBannerProps {
   chat: ChatDataTypes;
-}
-
-export interface SendersInfoTypes {
-  senderPic: string | undefined;
-  senderName: string | undefined;
 }
 
 export const ChatListItem = ({ chat }: ChatBannerProps) => {
@@ -37,6 +33,8 @@ export const ChatListItem = ({ chat }: ChatBannerProps) => {
   const groupName = chat.chatName;
 
   const handleAccess = async () => {
+    socket.emit("joinRoom", chatId);
+
     setSelectedChatId(chatId);
     if (!isGroup) {
       setIsGroupChat(false);
@@ -45,6 +43,7 @@ export const ChatListItem = ({ chat }: ChatBannerProps) => {
       setIsGroupChat(isGroup);
       setGroupChatName(chat.chatName);
     }
+
     if (isMobile) {
       setModal(ModalsEnum.CHAT);
     }

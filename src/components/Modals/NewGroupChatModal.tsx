@@ -3,11 +3,10 @@ import { IoClose } from "react-icons/io5";
 import SearchDropDown from "../Chat/SearchDropDown";
 import { axiosCreateGroupChat } from "../../API";
 import { isAxiosError } from "axios";
-import DataContext, {
-  DataContextProps,
-  UserDataTypes,
-} from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
 import { ModalsEnum } from "../../pages/Chat";
+import { UserDataTypes } from "../../types/UserTypes";
+import { DataContextProps } from "../../types/common";
 
 export interface newChatDataTypes {
   name: string;
@@ -36,21 +35,23 @@ const NewGroupChatModal = () => {
   const handleNewChat = async () => {
     const idArray = selectedUsersArray.map((obj) => obj._id);
 
-    const newChatData: newChatDataTypes = {
+    const newChatData = {
       name: chatName,
       users: JSON.stringify(idArray),
     };
+
     try {
       const { data } = await axiosCreateGroupChat(newChatData);
       if (data) {
         setChats((prevChats) => [data, ...prevChats]);
         setSelectedChatId(data._id);
-        setModal(ModalsEnum.NOT_SHOW);
       }
-    } catch (err: unknown) {
+    } catch (err) {
       if (isAxiosError(err)) {
         console.log(err);
       }
+    } finally {
+      setModal(ModalsEnum.NOT_SHOW);
     }
   };
 

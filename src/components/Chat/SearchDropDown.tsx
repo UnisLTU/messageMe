@@ -1,9 +1,8 @@
-import DataContext, {
-  DataContextProps,
-  UserDataTypes,
-} from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
 import { useContext, useEffect, useState } from "react";
 import { axiosSearchUser } from "../../API";
+import { UserDataTypes } from "../../types/UserTypes";
+import { DataContextProps } from "../../types/common";
 
 interface SearchDropDownProps {
   setSelectedUser: (user: UserDataTypes) => void;

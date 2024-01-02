@@ -1,20 +1,11 @@
 import { SlPlus } from "react-icons/sl";
 import { ChatListItem } from "../ChatListItem";
 import { Navigation } from "../Navigation/Navigation";
-import DataContext, {
-  ChatDataTypes,
-  DataContextProps,
-} from "../../../context/DataContext";
-import { Dispatch, SetStateAction, useContext } from "react";
+import DataContext from "../../../context/DataContext";
+import { useContext } from "react";
 import ChatBox from "../ChatBox";
 import { ModalsEnum } from "../../../pages/Chat";
-
-export interface ChatProps {
-  setModal: Dispatch<SetStateAction<ModalsEnum>>;
-  personalChats: ChatDataTypes[];
-  selectedId: string;
-  setSelectedId: Dispatch<SetStateAction<string>>;
-}
+import { DataContextProps } from "../../../types/common";
 
 const ChatDesktop = () => {
   const { chats, setModal } = useContext(DataContext) as DataContextProps;

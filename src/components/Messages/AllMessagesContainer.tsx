@@ -1,20 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Message } from "./Message";
-import { UserDataTypes } from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
+import { DataContextProps } from "../../types/common";
 
-export interface AllMessagesProps {
-  messages: MessageTypes[];
-}
-
-export interface MessageTypes {
-  _id: string;
-  content: string;
-  createdAt: string;
-  sender: UserDataTypes;
-}
-
-const AllMessagesContainer = ({ messages }: AllMessagesProps) => {
+const AllMessagesContainer = () => {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const { messages } = useContext(DataContext) as DataContextProps;
 
   useEffect(() => {
     if (messagesEndRef.current) {

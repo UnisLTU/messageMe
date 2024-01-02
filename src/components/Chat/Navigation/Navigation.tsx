@@ -1,8 +1,9 @@
 import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import DataContext, { DataContextProps } from "../../../context/DataContext";
+import DataContext from "../../../context/DataContext";
 import { ModalsEnum } from "../../../pages/Chat";
+import { DataContextProps } from "../../../types/common";
 
 export const Navigation = () => {
   const { userData, setModal } = useContext(DataContext) as DataContextProps;

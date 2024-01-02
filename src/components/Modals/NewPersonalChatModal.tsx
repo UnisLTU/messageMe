@@ -3,13 +3,11 @@ import { IoClose } from "react-icons/io5";
 import SearchDropDown from "../Chat/SearchDropDown";
 import { axiosCreateOrAccess } from "../../API";
 import { isAxiosError } from "axios";
-import DataContext, {
-  ChatDataTypes,
-  DataContextProps,
-  UserDataTypes,
-} from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
 import { ModalsEnum } from "../../pages/Chat";
 import { SendersInfo } from "../../utils/SendersInfo";
+import { UserDataTypes } from "../../types/UserTypes";
+import { DataContextProps } from "../../types/common";
 
 export interface UserIdTypes {
   userId: string | undefined;
@@ -32,29 +30,25 @@ const NewPersonalChatModal = () => {
   const handleNewChat = async () => {
     try {
       const { data } = await axiosCreateOrAccess(userId);
-      if (data) {
-        const createNewPersonalChat = (newChat: ChatDataTypes) => {
-          const doesChatExist = chats.some((item) => item._id === newChat._id);
-          const sender = SendersInfo(userData, newChat);
 
-          if (doesChatExist) {
-            setSelectedChatUser(sender);
-            setSelectedChatId(newChat._id);
-            setModal(ModalsEnum.NOT_SHOW);
-            return;
-          } else {
-            setChats((prevChats) => [newChat, ...prevChats]);
-            setSelectedChatUser(sender);
-            setSelectedChatId(newChat._id);
-            setModal(ModalsEnum.NOT_SHOW);
-          }
-        };
-        createNewPersonalChat(data);
+      if (data) {
+        const doesChatExist = chats.some((item) => item._id === data._id);
+        const sender = SendersInfo(userData, data);
+
+        if (doesChatExist) {
+          setSelectedChatUser(sender);
+        } else {
+          setChats((prevChats) => [data, ...prevChats]);
+        }
+
+        setSelectedChatId(data._id);
       }
-    } catch (err: unknown) {
+    } catch (err) {
       if (isAxiosError(err)) {
         console.log(err);
       }
+    } finally {
+      setModal(ModalsEnum.NOT_SHOW);
     }
   };
 

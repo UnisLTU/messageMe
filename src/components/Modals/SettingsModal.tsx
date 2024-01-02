@@ -1,7 +1,8 @@
 import { IoClose } from "react-icons/io5";
 import { ModalsEnum } from "../../pages/Chat";
 import { useContext } from "react";
-import DataContext, { DataContextProps } from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
+import { DataContextProps } from "../../types/common";
 
 const SettingsModal = () => {
   const { setModal } = useContext(DataContext) as DataContextProps;

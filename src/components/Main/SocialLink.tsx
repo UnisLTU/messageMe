@@ -1,4 +1,10 @@
-import { LinkTypes } from "./SignIn";
+import { ReactNode } from "react";
+
+export interface LinkTypes {
+  name: string;
+  text: string;
+  Icon: ReactNode;
+}
 
 export const SocialLink = ({ name, text, Icon }: LinkTypes) => {
   return (
