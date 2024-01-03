@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import DataContext, { ChatDataTypes, UserDataTypes } from "./DataContext";
+import DataContext from "./DataContext";
 import { useEffect, useState } from "react";
-import { SendersInfoTypes } from "../components/Chat/ChatListItem";
 import { ModalsEnum } from "../pages/Chat";
+import { SendersInfoTypes, UserDataTypes } from "../types/UserTypes";
+import { ChatDataTypes } from "../types/ChatTypes";
+import { MessageTypes } from "../types/MessagesTypes";
 
 const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [isGroupChat, setIsGroupChat] = useState(false);
   const [groupChatName, setGroupChatName] = useState("");
   const [refetch, setRefetch] = useState(true);
+  const [messages, setMessages] = useState<MessageTypes[]>([]);
 
   useEffect(() => {
     const storageUser = localStorage.getItem("userData");
@@ -51,6 +54,8 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
         setGroupChatName,
         refetch,
         setRefetch,
+        messages,
+        setMessages,
       }}
     >
       {children}

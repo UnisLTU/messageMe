@@ -4,20 +4,11 @@ import { Input } from "./Input";
 import { MouseEvent } from "react";
 import SocialLinks from "./SocialLinks";
 import { ErrorModal } from "./ErrorModal";
-
 import { isAxiosError } from "axios";
 import { axiosSignUp } from "../../API";
 
 export interface SignUpTypes {
   setIsSignUp: Dispatch<SetStateAction<boolean>>;
-}
-
-export interface InputProps {
-  labelText: string;
-  type: string;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  maxLength: number;
-  name: string;
 }
 
 export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
@@ -52,13 +43,14 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
       setTimeout(() => {
         setError("");
       }, 10000);
+    } finally {
+      setUserDetails({
+        ...userDetails,
+        password: "",
+        name: "",
+        email: "",
+      });
     }
-    setUserDetails({
-      ...userDetails,
-      password: "",
-      name: "",
-      email: "",
-    });
   };
 
   const inputData = [

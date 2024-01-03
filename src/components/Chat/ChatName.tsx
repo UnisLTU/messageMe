@@ -1,5 +1,6 @@
-import DataContext, { DataContextProps } from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
 import { useContext } from "react";
+import { DataContextProps } from "../../types/common";
 
 export const ChatName = () => {
   const { selectedChatUser, isGroupChat, groupChatName } = useContext(

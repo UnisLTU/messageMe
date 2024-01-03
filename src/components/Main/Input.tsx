@@ -1,4 +1,12 @@
-import { InputProps } from "./SignUp";
+import { ChangeEvent } from "react";
+
+interface InputProps {
+  labelText: string;
+  type: string;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  maxLength: number;
+  name: string;
+}
 
 export const Input = ({
   labelText,

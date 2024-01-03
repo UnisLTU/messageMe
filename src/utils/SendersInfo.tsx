@@ -1,5 +1,5 @@
-import { SendersInfoTypes } from "../components/Chat/ChatListItem";
-import { ChatDataTypes, UserDataTypes } from "../context/DataContext";
+import { ChatDataTypes } from "../types/ChatTypes";
+import { SendersInfoTypes, UserDataTypes } from "../types/UserTypes";
 
 export const SendersInfo = (
   userData: UserDataTypes | undefined,
