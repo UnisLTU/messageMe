@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import SearchDropDown from "../Chat/SearchDropDown";
-import { axiosCreateGroupChat } from "../../API";
+import SearchDropDown from "../SearchDropDown";
+import { axiosCreateGroupChat } from "../../../API";
 import { isAxiosError } from "axios";
-import DataContext from "../../context/DataContext";
-import { ModalsEnum } from "../../pages/Chat";
-import { UserDataTypes } from "../../types/UserTypes";
-import { DataContextProps } from "../../types/common";
+import DataContext from "../../../context/DataContext";
+import { ModalsEnum } from "../../../pages/Chat";
+import { UserDataTypes } from "../../../types/UserTypes";
+import { DataContextProps } from "../../../types/common";
 
 export interface newChatDataTypes {
   name: string;

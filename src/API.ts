@@ -1,9 +1,9 @@
 import axios from "axios";
 import { UserDataTypes } from "./types/UserTypes";
-import { UserIdTypes } from "./components/Modals/NewPersonalChatModal";
-import { MessageToSendTypes } from "./components/Messages/MessageSendContainer";
-import { newChatDataTypes } from "./components/Modals/NewGroupChatModal";
-import { MessageEditTypes } from "./components/Messages/MessageEditFrom";
+import { UserIdTypes } from "./components/Chat/Modals/NewPersonalChatModal";
+import { MessageToSendTypes } from "./components/Chat/Messages/MessageSendContainer";
+import { newChatDataTypes } from "./components/Chat/Modals/NewGroupChatModal";
+import { MessageEditTypes } from "./components/Chat/Messages/MessageEditFrom";
 
 const api = axios.create({
   baseURL: "http://localhost:4000/api/", //API base URL

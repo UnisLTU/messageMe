@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { IoClose } from "react-icons/io5";
-import DataContext from "../../context/DataContext";
-import { ModalsEnum } from "../../pages/Chat";
-import ChatBox from "../Chat/ChatBox";
-import { DataContextProps } from "../../types/common";
+import DataContext from "../../../context/DataContext";
+import { ModalsEnum } from "../../../pages/Chat";
+import ChatBox from "../ChatBox";
+import { DataContextProps } from "../../../types/common";
 
 const ChatBoxModal = () => {
   const { setModal } = useContext(DataContext) as DataContextProps;

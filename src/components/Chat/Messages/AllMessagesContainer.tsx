@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import { Message } from "./Message";
-import DataContext from "../../context/DataContext";
-import { DataContextProps } from "../../types/common";
+import DataContext from "../../../context/DataContext";
+import { DataContextProps } from "../../../types/common";
 
 const AllMessagesContainer = () => {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);

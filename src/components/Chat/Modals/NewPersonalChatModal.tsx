@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import SearchDropDown from "../Chat/SearchDropDown";
-import { axiosCreateOrAccess } from "../../API";
+import SearchDropDown from "../SearchDropDown";
+import { axiosCreateOrAccess } from "../../../API";
 import { isAxiosError } from "axios";
-import DataContext from "../../context/DataContext";
-import { ModalsEnum } from "../../pages/Chat";
-import { SendersInfo } from "../../utils/SendersInfo";
-import { UserDataTypes } from "../../types/UserTypes";
-import { DataContextProps } from "../../types/common";
+import DataContext from "../../../context/DataContext";
+import { ModalsEnum } from "../../../pages/Chat";
+import { SendersInfo } from "../../../utils/SendersInfo";
+import { UserDataTypes } from "../../../types/UserTypes";
+import { DataContextProps } from "../../../types/common";
 
 export interface UserIdTypes {
   userId: string | undefined;

@@ -2,11 +2,11 @@ import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { MdOutlineCancel } from "react-icons/md";
 import { isAxiosError } from "axios";
-import { axiosEditMessage } from "../../API";
-import { socket } from "../Chat/ChatListItem";
-import { editMessage } from "../../utils/messageFunc";
-import DataContext from "../../context/DataContext";
-import { DataContextProps } from "../../types/common";
+import { axiosEditMessage } from "../../../API";
+import { socket } from "../ChatListItem";
+import { editMessage } from "../../../utils/messageFunc";
+import DataContext from "../../../context/DataContext";
+import { DataContextProps } from "../../../types/common";
 
 interface MessageEditFormProps {
   messageContent: string;

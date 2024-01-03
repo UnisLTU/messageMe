@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import { LuSend } from "react-icons/lu";
-import { axiosSendMessage } from "../../API";
+import { axiosSendMessage } from "../../../API";
 import { isAxiosError } from "axios";
-import DataContext from "../../context/DataContext";
-import { socket } from "../Chat/ChatListItem";
-import { DataContextProps } from "../../types/common";
+import DataContext from "../../../context/DataContext";
+import { socket } from "../ChatListItem";
+import { DataContextProps } from "../../../types/common";
 
 export interface MessageToSendTypes {
   content: string;

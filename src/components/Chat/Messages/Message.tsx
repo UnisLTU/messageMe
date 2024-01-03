@@ -1,15 +1,15 @@
 import { useContext, useState } from "react";
-import DataContext from "../../context/DataContext";
-import { axiosRemoveMessage } from "../../API";
+import DataContext from "../../../context/DataContext";
+import { axiosRemoveMessage } from "../../../API";
 import { isAxiosError } from "axios";
 import { MdDeleteForever } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import MessageContent from "./MessageContent";
 import MessageEditFrom from "./MessageEditFrom";
-import { socket } from "../Chat/ChatListItem";
-import { MessageTypes } from "../../types/MessagesTypes";
-import { DataContextProps } from "../../types/common";
-import { deleteMessage } from "../../utils/messageFunc";
+import { socket } from "../ChatListItem";
+import { MessageTypes } from "../../../types/MessagesTypes";
+import { DataContextProps } from "../../../types/common";
+import { deleteMessage } from "../../../utils/messageFunc";
 
 interface MessageProps {
   message: MessageTypes;

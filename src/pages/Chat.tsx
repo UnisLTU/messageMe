@@ -1,13 +1,13 @@
-import NewPersonalChatModal from "../components/Modals/NewPersonalChatModal";
+import NewPersonalChatModal from "../components/Chat/Modals/NewPersonalChatModal";
 import DataContext from "../context/DataContext";
-import ChatDesktop from "../components/Chat/ChatDesktop/ChatDesktop";
-import SettingsModal from "../components/Modals/SettingsModal";
+import ChatDesktop from "../components/Chat/ChatDesktop";
+import SettingsModal from "../components/Chat/Modals/SettingsModal";
 import ChatMobile from "../components/Chat/ChatMobile";
 import { useContext, useEffect } from "react";
 import { axiosFetchChats } from "../API";
 import { isAxiosError } from "axios";
-import ChatBoxModal from "../components/Modals/ChatBoxModal";
-import NewGroupChatModal from "../components/Modals/NewGroupChatModal";
+import ChatBoxModal from "../components/Chat/Modals/ChatBoxModal";
+import NewGroupChatModal from "../components/Chat/Modals/NewGroupChatModal";
 import io from "socket.io-client";
 import { DataContextProps } from "../types/common";
 export const socket = io("http://localhost:4000");
