@@ -1,9 +1,10 @@
 import { SlPlus } from "react-icons/sl";
-import { Navigation } from "./Navigation/Navigation";
+import { Navigation } from "./Navigation";
 import { ChatListItem } from "./ChatListItem";
 import { useContext } from "react";
-import DataContext, { DataContextProps } from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
 import { ModalsEnum } from "../../pages/Chat";
+import { DataContextProps } from "../../types/common";
 
 const ChatMobile = () => {
   const { chats, setModal } = useContext(DataContext) as DataContextProps;

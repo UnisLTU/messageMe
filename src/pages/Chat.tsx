@@ -1,25 +1,31 @@
-import NewPersonalChatModal from "../components/Modals/NewPersonalChatModal";
-import DataContext, { DataContextProps } from "../context/DataContext";
-import ChatDesktop from "../components/Chat/ChatDesktop/ChatDesktop";
-import SettingsModal from "../components/Modals/SettingsModal";
+import NewPersonalChatModal from "../components/Chat/Modals/NewPersonalChatModal";
+import DataContext from "../context/DataContext";
+import ChatDesktop from "../components/Chat/ChatDesktop";
+import SettingsModal from "../components/Chat/Modals/SettingsModal";
 import ChatMobile from "../components/Chat/ChatMobile";
 import { useContext, useEffect } from "react";
 import { axiosFetchChats } from "../API";
 import { isAxiosError } from "axios";
-import ChatBoxModal from "../components/Modals/ChatBoxModal";
-import NewGroupChatModal from "../components/Modals/NewGroupChatModal";
+import ChatBoxModal from "../components/Chat/Modals/ChatBoxModal";
+import NewGroupChatModal from "../components/Chat/Modals/NewGroupChatModal";
+import io from "socket.io-client";
+import { DataContextProps } from "../types/common";
+import { GroupChatSettingsModal } from "../components/Chat/Modals/GroupChatSettingsModal";
+export const socket = io("http://localhost:4000");
 
 export enum ModalsEnum {
   SETTINGS = "settings",
   NEW_PERSONAL_CHAT = "newPersonalChat",
   NEW_GROUP_CHAT = "newGroupChat",
   CHAT = "chat",
+  GROUP_CHAT_SETTINGS = "groupChatSettings",
   NOT_SHOW = "",
 }
 
 const Chat = () => {
-  const { userData, setChats, setIsMobile, isMobile, modal, refetch } =
-    useContext(DataContext) as DataContextProps;
+  const { userData, setChats, setIsMobile, isMobile, modal } = useContext(
+    DataContext
+  ) as DataContextProps;
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -28,14 +34,12 @@ const Chat = () => {
 
         setChats(data);
       } catch (err) {
-        if (isAxiosError(err)) {
-          console.log(err);
-        }
+        if (isAxiosError(err)) console.log(err);
       }
     };
 
     if (userData) fetchChats();
-  }, [userData, refetch]);
+  }, [userData]);
 
   const modalView = () => {
     switch (modal) {
@@ -47,13 +51,12 @@ const Chat = () => {
         return <NewGroupChatModal />;
       case ModalsEnum.CHAT:
         return <ChatBoxModal />;
+      case ModalsEnum.GROUP_CHAT_SETTINGS:
+        return <GroupChatSettingsModal />;
       default:
         return null;
     }
   };
-
-  // const groupChats: ChatData[] =
-  //   chats?.filter(({ isGroupChat }) => isGroupChat) || [];
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -68,7 +71,6 @@ const Chat = () => {
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
-    handleWindowResize();
   }, []);
 
   return (

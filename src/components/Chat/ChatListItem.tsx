@@ -1,18 +1,14 @@
 import { useContext } from "react";
-import DataContext, {
-  ChatDataTypes,
-  DataContextProps,
-} from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
 import { SendersInfo } from "../../utils/SendersInfo";
 import { ModalsEnum } from "../../pages/Chat";
+import io from "socket.io-client";
+import { DataContextProps } from "../../types/common";
+import { ChatDataTypes } from "../../types/ChatTypes";
+export const socket = io("http://localhost:4000");
 
-export interface ChatBannerProps {
+interface ChatBannerProps {
   chat: ChatDataTypes;
-}
-
-export interface SendersInfoTypes {
-  senderPic: string | undefined;
-  senderName: string | undefined;
 }
 
 export const ChatListItem = ({ chat }: ChatBannerProps) => {
@@ -25,6 +21,8 @@ export const ChatListItem = ({ chat }: ChatBannerProps) => {
     isMobile,
     setIsGroupChat,
     setGroupChatName,
+    setGroupAdminId,
+    setChatUsers,
   } = useContext(DataContext) as DataContextProps;
 
   const sendersInfo = SendersInfo(userData, chat);
@@ -37,11 +35,15 @@ export const ChatListItem = ({ chat }: ChatBannerProps) => {
   const groupName = chat.chatName;
 
   const handleAccess = async () => {
-    setSelectedChatId(chatId);
+    socket.emit("joinRoom", chatId);
+    setSelectedChatId(chat._id);
+    setChatUsers(chat.users);
     if (!isGroup) {
+      setGroupAdminId("");
       setIsGroupChat(false);
       setSelectedChatUser(() => sendersInfo);
-    } else {
+    } else if (chat.groupAdmin?._id) {
+      setGroupAdminId(chat.groupAdmin._id);
       setIsGroupChat(isGroup);
       setGroupChatName(chat.chatName);
     }

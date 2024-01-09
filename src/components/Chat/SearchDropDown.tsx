@@ -1,9 +1,8 @@
-import DataContext, {
-  DataContextProps,
-  UserDataTypes,
-} from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
 import { useContext, useEffect, useState } from "react";
 import { axiosSearchUser } from "../../API";
+import { UserDataTypes } from "../../types/UserTypes";
+import { DataContextProps } from "../../types/common";
 
 interface SearchDropDownProps {
   setSelectedUser: (user: UserDataTypes) => void;
@@ -37,7 +36,7 @@ const SearchDropDown = ({ setSelectedUser }: SearchDropDownProps) => {
   };
 
   return (
-    <form className="h-18 w-1/2 relative flex justify-center rounded-xl border-2 border-slate-500 ">
+    <form className="h-18  relative flex justify-center rounded-xl border-2 border-slate-500 ">
       <input
         placeholder="Search for person"
         type="text"

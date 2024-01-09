@@ -1,8 +1,10 @@
 import axios from "axios";
-import { UserDataTypes } from "./context/DataContext";
-import { MessageToSendTypes } from "./components/Messages/MessageSendContainer";
-import { UserIdTypes } from "./components/Modals/NewPersonalChatModal";
-import { newChatDataTypes } from "./components/Modals/NewGroupChatModal";
+import { UserDataTypes } from "./types/UserTypes";
+import { UserIdTypes } from "./components/Chat/Modals/NewPersonalChatModal";
+import { MessageToSendTypes } from "./components/Chat/Messages/MessageSendContainer";
+import { newChatDataTypes } from "./components/Chat/Modals/NewGroupChatModal";
+import { MessageEditTypes } from "./components/Chat/Messages/MessageEditFrom";
+import { ChatDataTypes } from "./types/ChatTypes";
 
 const api = axios.create({
   baseURL: "http://localhost:4000/api/", //API base URL
@@ -45,12 +47,12 @@ export const axiosFetchChats = () => {
   return api.get("/chat");
 };
 
-//send new messagae
+//send new message
 export const axiosCreateOrAccess = (data: UserIdTypes) => {
   return api.post("/chat", { ...data });
 };
 
-//send new messagae
+//create new group
 export const axiosCreateGroupChat = (data: newChatDataTypes) => {
   return api.post("/chat/creategroup", { ...data });
 };
@@ -63,6 +65,24 @@ export const axiosAllMessages = (selectedChat: string) => {
 //send new message to chat with id
 export const axiosSendMessage = (data: MessageToSendTypes) => {
   return api.post("/message", { ...data });
+};
+
+//remove message by id
+export const axiosRemoveMessage = (_id: string) => {
+  return api.put("/message/remove", { _id });
+};
+
+//remove message by id
+export const axiosEditMessage = (data: MessageEditTypes) => {
+  return api.put("/message/edit", { ...data });
+};
+
+export const axiosRemoveUser = (data: ChatDataTypes) => {
+  return api.put("/chat/groupremove", { ...data });
+};
+
+export const axiosAddUser = (data: ChatDataTypes) => {
+  return api.put("/chat/addtogroup", { ...data });
 };
 
 export default api;

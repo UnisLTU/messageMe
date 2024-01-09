@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode } from "react";
+import { ChangeEvent } from "react";
 import { useState, useContext } from "react";
 import { MouseEvent } from "react";
 import Logo1 from "../../assets/Logo.png";
@@ -7,15 +7,10 @@ import { useNavigate } from "react-router-dom";
 import SocialLinks from "./SocialLinks";
 import { Input } from "./Input";
 import { isAxiosError } from "axios";
-import DataContext, { DataContextProps } from "../../context/DataContext";
+import DataContext from "../../context/DataContext";
 import { ErrorModal } from "./ErrorModal";
 import { axiosSignIn } from "../../API";
-
-export interface LinkTypes {
-  name: string;
-  text: string;
-  Icon: ReactNode;
-}
+import { DataContextProps } from "../../types/common";
 
 export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
   const { setUserData } = useContext(DataContext) as DataContextProps;
@@ -37,18 +32,6 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
   const fetchData = async () => {
     try {
       const { data } = await axiosSignIn(userDetails);
-
-      /* response 
-      {
-          "_id": "string",
-          "name": "string",
-          "email": "string",
-          "pic": "string",
-          "token": "string",
-          "success": boolean 
-      } 
-      */
-
       const { success } = data;
 
       if (success) {
@@ -64,22 +47,23 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
         setError("");
       }
     } catch (err: unknown) {
-      if (isAxiosError(err)) {
-        setError(err.response?.data.message);
-      }
+      if (isAxiosError(err)) setError(err.response?.data.message);
+
       setTimeout(() => {
         setError("");
       }, 10000);
+    } finally {
+      setUserDetails({
+        ...userDetails,
+        password: "",
+        email: "",
+      });
     }
   };
+
   const handleSignIn = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     fetchData();
-    setUserDetails({
-      ...userDetails,
-      password: "",
-      email: "",
-    });
   };
 
   const inputData = [

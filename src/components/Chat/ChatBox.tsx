@@ -1,17 +1,20 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { ChatName } from "./ChatName";
 import { isAxiosError } from "axios";
 import { axiosAllMessages } from "../../API";
 import SVG from "../../assets/undraw_duplicate_re_d39g.svg";
-import { MessageTypes } from "../Messages/AllMessagesContainer";
-import AllMessagesContainer from "../Messages/AllMessagesContainer";
-import MessageSendContainer from "../Messages/MessageSendContainer";
-import DataContext, { DataContextProps } from "../../context/DataContext";
+import AllMessagesContainer from "./Messages/AllMessagesContainer";
+import MessageSendContainer from "./Messages/MessageSendContainer";
+import DataContext from "../../context/DataContext";
+import { socket } from "./ChatListItem";
+import { deleteMessage, editMessage } from "../../utils/messageFunc";
+import { DataContextProps } from "../../types/common";
+import { MessageTypes } from "../../types/MessagesTypes";
 
 const ChatBox = () => {
-  const { selectedChatId } = useContext(DataContext) as DataContextProps;
-  const [messages, setMessages] = useState<MessageTypes[]>([]);
-  const { refetch } = useContext(DataContext) as DataContextProps;
+  const { selectedChatId, messages, setMessages } = useContext(
+    DataContext
+  ) as DataContextProps;
 
   useEffect(() => {
     const allMessages = async () => {
@@ -26,7 +29,35 @@ const ChatBox = () => {
     };
 
     if (selectedChatId) allMessages();
-  }, [selectedChatId, refetch]);
+  }, [selectedChatId]);
+
+  useEffect(() => {
+    const messageReceivedHandler = (data: MessageTypes) => {
+      if (selectedChatId === data.chat._id)
+        setMessages((messages) => [...messages, data]);
+    };
+
+    const messageDeleteHandler = (data: string) => {
+      const deletedMessageArray = deleteMessage(data, messages);
+      setMessages(deletedMessageArray);
+    };
+
+    const messageEditHandler = (data: string) => {
+      const editedMessageArray = editMessage(data, messages);
+      setMessages(editedMessageArray);
+    };
+
+    socket.on("messageReceived", messageReceivedHandler);
+    socket.on("messageDeleted", messageDeleteHandler);
+    socket.on("messageEdited", messageEditHandler);
+
+    // Clean up
+    return () => {
+      socket.off("messageReceived", messageReceivedHandler);
+      socket.off("messageDeleted", messageDeleteHandler);
+      socket.off("messageEdited", messageEditHandler);
+    };
+  }, [messages, selectedChatId]);
 
   return (
     <>
@@ -35,10 +66,10 @@ const ChatBox = () => {
           <ChatName />
           <div className="h-full my-4 space-y-2 flex flex-col justify-end overflow-hidden">
             <div className="flex flex-col overflow-scroll no-scrollbar">
-              <AllMessagesContainer messages={messages} />
+              <AllMessagesContainer />
             </div>
           </div>
-          <MessageSendContainer setMessages={setMessages} />
+          <MessageSendContainer />
         </div>
       ) : (
         <div className="md:w-1/2 w-full bg-slate-50 rounded-xl justify-center items-center flex flex-col p-4 space-y-4">
