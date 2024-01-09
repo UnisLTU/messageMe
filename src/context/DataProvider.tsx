@@ -20,8 +20,9 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [modal, setModal] = useState(ModalsEnum.NOT_SHOW);
   const [isGroupChat, setIsGroupChat] = useState(false);
   const [groupChatName, setGroupChatName] = useState("");
-  const [refetch, setRefetch] = useState(true);
   const [messages, setMessages] = useState<MessageTypes[]>([]);
+  const [groupAdminId, setGroupAdminId] = useState("");
+  const [chatUsers, setChatUsers] = useState<UserDataTypes[]>([]);
 
   useEffect(() => {
     const storageUser = localStorage.getItem("userData");
@@ -52,10 +53,12 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
         setIsGroupChat,
         groupChatName,
         setGroupChatName,
-        refetch,
-        setRefetch,
         messages,
         setMessages,
+        groupAdminId,
+        setGroupAdminId,
+        chatUsers,
+        setChatUsers,
       }}
     >
       {children}

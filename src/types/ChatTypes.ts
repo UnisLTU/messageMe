@@ -12,4 +12,5 @@ export interface ChatDataTypes {
   updatedAt: string;
   latestMessage: LatestMessageTypes;
   users: UserDataTypes[];
+  groupAdmin?: UserDataTypes;
 }

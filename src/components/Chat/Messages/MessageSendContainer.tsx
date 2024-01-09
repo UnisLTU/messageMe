@@ -29,9 +29,7 @@ const MessageSendContainer = () => {
         setMessages((prev) => [...prev, data]);
       }
     } catch (err: unknown) {
-      if (isAxiosError(err)) {
-        console.log(err);
-      }
+      if (isAxiosError(err)) console.log(err);
     } finally {
       setContent("");
     }

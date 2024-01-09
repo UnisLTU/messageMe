@@ -21,8 +21,10 @@ export interface DataContextProps {
   setIsGroupChat: Dispatch<SetStateAction<boolean>>;
   groupChatName: string;
   setGroupChatName: Dispatch<SetStateAction<string>>;
-  refetch: boolean;
-  setRefetch: Dispatch<SetStateAction<boolean>>;
   messages: MessageTypes[];
   setMessages: Dispatch<SetStateAction<MessageTypes[]>>;
+  groupAdminId: string;
+  setGroupAdminId: Dispatch<SetStateAction<string>>;
+  chatUsers: UserDataTypes[];
+  setChatUsers: Dispatch<SetStateAction<UserDataTypes[]>>;
 }

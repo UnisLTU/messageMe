@@ -47,9 +47,7 @@ const NewGroupChatModal = () => {
         setSelectedChatId(data._id);
       }
     } catch (err) {
-      if (isAxiosError(err)) {
-        console.log(err);
-      }
+      if (isAxiosError(err)) console.log(err);
     } finally {
       setModal(ModalsEnum.NOT_SHOW);
     }

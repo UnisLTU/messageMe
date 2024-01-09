@@ -37,9 +37,7 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
         setError("");
       }
     } catch (err: unknown) {
-      if (isAxiosError(err)) {
-        setError(err.response?.data.message);
-      }
+      if (isAxiosError(err)) setError(err.response?.data.message);
       setTimeout(() => {
         setError("");
       }, 10000);

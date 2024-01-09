@@ -4,6 +4,7 @@ import { UserIdTypes } from "./components/Chat/Modals/NewPersonalChatModal";
 import { MessageToSendTypes } from "./components/Chat/Messages/MessageSendContainer";
 import { newChatDataTypes } from "./components/Chat/Modals/NewGroupChatModal";
 import { MessageEditTypes } from "./components/Chat/Messages/MessageEditFrom";
+import { ChatDataTypes } from "./types/ChatTypes";
 
 const api = axios.create({
   baseURL: "http://localhost:4000/api/", //API base URL
@@ -74,6 +75,14 @@ export const axiosRemoveMessage = (_id: string) => {
 //remove message by id
 export const axiosEditMessage = (data: MessageEditTypes) => {
   return api.put("/message/edit", { ...data });
+};
+
+export const axiosRemoveUser = (data: ChatDataTypes) => {
+  return api.put("/chat/groupremove", { ...data });
+};
+
+export const axiosAddUser = (data: ChatDataTypes) => {
+  return api.put("/chat/addtogroup", { ...data });
 };
 
 export default api;

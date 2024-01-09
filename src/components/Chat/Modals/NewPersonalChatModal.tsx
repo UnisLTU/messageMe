@@ -35,18 +35,13 @@ const NewPersonalChatModal = () => {
         const doesChatExist = chats.some((item) => item._id === data._id);
         const sender = SendersInfo(userData, data);
 
-        if (doesChatExist) {
-          setSelectedChatUser(sender);
-        } else {
-          setChats((prevChats) => [data, ...prevChats]);
-        }
+        if (doesChatExist) setSelectedChatUser(sender);
+        else setChats((prevChats) => [data, ...prevChats]);
 
         setSelectedChatId(data._id);
       }
     } catch (err) {
-      if (isAxiosError(err)) {
-        console.log(err);
-      }
+      if (isAxiosError(err)) console.log(err);
     } finally {
       setModal(ModalsEnum.NOT_SHOW);
     }

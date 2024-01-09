@@ -40,9 +40,7 @@ const MessageEditFrom = ({
       const deletedMessageArray = editMessage(data, messages);
       setMessages(deletedMessageArray);
     } catch (err) {
-      if (isAxiosError(err)) {
-        console.log(err);
-      }
+      if (isAxiosError(err)) console.log(err);
     } finally {
       setIsEditMessage(false);
     }

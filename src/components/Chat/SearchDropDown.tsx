@@ -36,7 +36,7 @@ const SearchDropDown = ({ setSelectedUser }: SearchDropDownProps) => {
   };
 
   return (
-    <form className="h-18 w-1/2 relative flex justify-center rounded-xl border-2 border-slate-500 ">
+    <form className="h-18  relative flex justify-center rounded-xl border-2 border-slate-500 ">
       <input
         placeholder="Search for person"
         type="text"

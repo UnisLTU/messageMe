@@ -21,6 +21,8 @@ export const ChatListItem = ({ chat }: ChatBannerProps) => {
     isMobile,
     setIsGroupChat,
     setGroupChatName,
+    setGroupAdminId,
+    setChatUsers,
   } = useContext(DataContext) as DataContextProps;
 
   const sendersInfo = SendersInfo(userData, chat);
@@ -34,16 +36,17 @@ export const ChatListItem = ({ chat }: ChatBannerProps) => {
 
   const handleAccess = async () => {
     socket.emit("joinRoom", chatId);
-
-    setSelectedChatId(chatId);
+    setSelectedChatId(chat._id);
+    setChatUsers(chat.users);
     if (!isGroup) {
+      setGroupAdminId("");
       setIsGroupChat(false);
       setSelectedChatUser(() => sendersInfo);
-    } else {
+    } else if (chat.groupAdmin?._id) {
+      setGroupAdminId(chat.groupAdmin._id);
       setIsGroupChat(isGroup);
       setGroupChatName(chat.chatName);
     }
-
     if (isMobile) {
       setModal(ModalsEnum.CHAT);
     }

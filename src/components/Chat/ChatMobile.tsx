@@ -1,5 +1,5 @@
 import { SlPlus } from "react-icons/sl";
-import { Navigation } from "./Navigation/Navigation";
+import { Navigation } from "./Navigation";
 import { ChatListItem } from "./ChatListItem";
 import { useContext } from "react";
 import DataContext from "../../context/DataContext";

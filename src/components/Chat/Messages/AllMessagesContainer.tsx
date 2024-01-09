@@ -8,9 +8,7 @@ const AllMessagesContainer = () => {
   const { messages } = useContext(DataContext) as DataContextProps;
 
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView();
-    }
+    if (messagesEndRef.current) messagesEndRef.current.scrollIntoView();
   }, [messages]);
 
   return (
