@@ -54,8 +54,8 @@ const NewGroupChatModal = () => {
   };
 
   return (
-    <div className="absolute flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.5)]">
-      <div className="bg-slate-50 w-[400px] rounded-xl flex flex-col relative items-center p-2 space-y-4">
+    <div className="absolute flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.5)] dark:text-white">
+      <div className="bg-slate-50 w-[400px] rounded-xl flex flex-col relative items-center p-2 space-y-4 dark:bg-gray-900">
         <h1 className="text-2xl">Start New Group Chat</h1>
         <div className="absolute top-0 right-0 p-2 cursor-pointer">
           <IoClose onClick={() => setModal(ModalsEnum.NOT_SHOW)} size={32} />
@@ -64,7 +64,7 @@ const NewGroupChatModal = () => {
           Group chat name
           <input
             required
-            className="w-64 h-12 pl-3 rounded-lg flex items-center justify-center"
+            className="w-64 h-12 pl-3 rounded-lg flex items-center justify-center dark:bg-gray-950"
             type="text"
             maxLength={20}
             onChange={(e) => setChatName(e.target.value)}
@@ -83,7 +83,7 @@ const NewGroupChatModal = () => {
           disabled={
             selectedUsersArray.length > 1 || chatName.length > 1 ? false : true
           }
-          className="bg-slate-200 disabled:bg-red-100 w-36 rounded-xl text-center p-2 mb-2"
+          className="bg-slate-200 disabled:bg-red-100 dark:bg-gray-950 dark:disabled:bg-gray-400 w-36 rounded-xl text-center p-2 mb-2"
         >
           Start chatting
         </button>

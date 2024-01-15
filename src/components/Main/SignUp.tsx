@@ -74,10 +74,10 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
   ];
 
   return (
-    <div className="h-screen w-full flex justify-center items-center flex-col">
+    <div className="h-screen w-full flex justify-center items-center flex-col dark:text-white">
       <form
         onSubmit={() => handleSubmit}
-        className="w-5/6 h-2/3 bg-slate-400 rounded-lg md:w-[500px] md:h-[600px] flex flex-col items-center justify-center"
+        className="w-5/6 h-2/3 bg-slate-400 dark:bg-gray-900 rounded-lg md:w-[500px] md:h-[600px] flex flex-col items-center justify-center"
       >
         <h1 className="text-2xl pb-2">Welcome to messageMe!</h1>
         <h2 className="pb-2">You can sign up here!</h2>
@@ -107,7 +107,7 @@ export const SignUp = ({ setIsSignUp }: SignUpTypes) => {
           <p>Already have an account?</p>
           <button
             onClick={() => setIsSignUp(false)}
-            className="text-cyan-800 hover:underline"
+            className="text-cyan-800 hover:underline dark:text-cyan-200"
           >
             Sign in
           </button>

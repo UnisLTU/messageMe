@@ -10,7 +10,7 @@ const ChatMobile = () => {
   const { chats, setModal } = useContext(DataContext) as DataContextProps;
   return (
     <>
-      <div className="w-full h-[calc(100%-70px)] p-4 flex flex-col bg-slate-200">
+      <div className="w-full h-[calc(100%-70px)] p-4 flex flex-col bg-slate-200 dark:bg-gray-950 dark:text-white">
         <h1 className="text-center font-bold text-2xl pb-4 tracking-widest">
           MessageMe App
         </h1>

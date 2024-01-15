@@ -17,3 +17,7 @@
     box-sizing: border-box;
   }
 }
+
+input[type="file"] {
+  opacity: 0;
+}

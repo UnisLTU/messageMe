@@ -9,7 +9,7 @@ export const Navigation = () => {
   const { userData, setModal } = useContext(DataContext) as DataContextProps;
 
   return (
-    <div className="md:w-[10%] md:rounded-xl md:h-full md:flex-col md:relative absolute bottom-0 w-full min-h-fit bg-slate-50 flex flex-row text-center items-center justify-around">
+    <div className="md:w-[10%] md:rounded-xl md:h-full md:flex-col md:relative absolute bottom-0 w-full min-h-fit bg-slate-50 dark:bg-gray-900 dark:text-white flex flex-row text-center items-center justify-around">
       <div className="md:flex flex-col hidden items-center space-y-2">
         <img
           className="bg-slate-800 h-20 w-20 rounded-full border-blue-400 border-4"

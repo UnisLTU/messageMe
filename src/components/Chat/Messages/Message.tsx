@@ -25,7 +25,6 @@ export const Message = ({ message }: MessageProps) => {
   const handleDelete = async () => {
     try {
       const { data } = await axiosRemoveMessage(_id);
-      console.log(data);
       socket.emit("deleteMessage", { data });
 
       const deletedMessageArray = deleteMessage(data, messages);
@@ -39,12 +38,12 @@ export const Message = ({ message }: MessageProps) => {
 
   const styles =
     loggedUser?._id !== sender._id
-      ? "bg-slate-200 pr-4 rounded-bl-none"
-      : "flex-row-reverse bg-blue-100 space-x-4 rounded-br-none";
+      ? "bg-slate-200 dark:bg-gray-950 pr-4 rounded-bl-none"
+      : "flex-row-reverse bg-blue-100 dark:bg-gray-800 space-x-4 rounded-br-none";
 
-  const picture = loggedUser?._id === sender._id ? sender.pic : userData?.pic;
+  const picture = loggedUser?._id !== sender._id ? sender.pic : userData?.pic;
 
-  const name = loggedUser?._id === sender._id ? sender.name : userData?.name;
+  const name = loggedUser?._id !== sender._id ? sender.name : userData?.name;
 
   const isoDate = new Date(createdAt);
 

@@ -55,7 +55,7 @@ const MessageEditFrom = ({
           onChange={(e) => {
             setEditedMessage(e.target.value);
           }}
-          className="px-4 bg-slate-200 w-full h-full  focus:outline-none"
+          className="px-4 bg-slate-200 dark:bg-gray-900 w-full h-full  focus:outline-none"
         />
       </form>
       <button

@@ -11,3 +11,7 @@ export interface SendersInfoTypes {
   senderPic: string | undefined;
   senderName: string | undefined;
 }
+
+export interface ChangeAvatarData {
+  url: string;
+}

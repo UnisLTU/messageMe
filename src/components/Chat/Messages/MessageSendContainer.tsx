@@ -36,13 +36,13 @@ const MessageSendContainer = () => {
   };
 
   return (
-    <div className="bg-slate-200  w-full h-24 flex flow-row rounded-xl overflow-hidden">
+    <div className="bg-slate-200 dark:bg-gray-950 w-full h-24 flex flow-row rounded-xl overflow-hidden">
       <form className="w-5/6 h-20 ">
         <input
           placeholder="Your message..."
           type="text"
           onChange={(e) => setContent(e.target.value)}
-          className="px-4 bg-slate-200 w-full h-full  focus:outline-none"
+          className="px-4 bg-slate-200 w-full h-full focus:outline-none dark:bg-gray-950"
           value={content}
         />
       </form>

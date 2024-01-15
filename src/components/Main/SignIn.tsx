@@ -85,8 +85,8 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
 
   return (
     <>
-      <div className="h-screen w-full flex justify-center items-center flex-col">
-        <form className="w-5/6 h-2/3 bg-slate-400 shadow-md rounded-lg md:w-[500px] md:h-[600px] flex flex-col items-center justify-center">
+      <div className="h-screen w-full flex justify-center items-center flex-col dark:text-white">
+        <form className="w-5/6 h-2/3 bg-slate-400 dark:bg-gray-900 shadow-md rounded-lg md:w-[500px] md:h-[600px] flex flex-col items-center justify-center">
           <img
             src={Logo1}
             alt="logo"
@@ -109,7 +109,7 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
           )}
           {!error ? <div className="h-8"></div> : <ErrorModal error={error} />}
           <button
-            className="w-64 h-12 rounded-lg bg-gray-700 flex items-center justify-center font-bold text-lg text-slate-200"
+            className="w-64 h-12 rounded-lg bg-gray-700 dark:bg-gray-950 flex items-center justify-center font-bold text-lg "
             type="button"
             onClick={(e) => handleSignIn(e)}
           >
@@ -119,7 +119,7 @@ export const SignIn = ({ setIsSignUp }: SignUpTypes) => {
             <p>Don't have account?</p>
             <button
               onClick={() => setIsSignUp(true)}
-              className="text-cyan-800 hover:underline"
+              className="text-cyan-800 hover:underline dark:text-cyan-200"
             >
               Sign up
             </button>
