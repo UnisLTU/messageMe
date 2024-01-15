@@ -130,9 +130,10 @@ export const GroupChatSettingsModal = () => {
             />
             <div className="flex space-x-4">
               <button
+                disabled={!newName}
                 type="button"
                 onClick={handleChatNameChange}
-                className="bg-red-200 dark:bg-gray-950 rounded-lg p-2 mt-4"
+                className="bg-red-200 dark:bg-gray-950 rounded-lg p-2 mt-4 disabled:bg-slate-200 disabled:dark:bg-gray-400"
               >
                 Confirm
               </button>

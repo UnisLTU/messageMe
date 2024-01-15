@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, ChangeEvent } from "react";
 import { isAxiosError } from "axios";
 import { axiosChangeAvatar, axiosUploadImage } from "../../API";
 import DataContext from "../../context/DataContext";
@@ -25,7 +25,7 @@ const ImageUpload = () => {
     }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] as File | undefined;
     setSelectedImage(file || null);
   };

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, KeyboardEvent } from "react";
 import { LuSend } from "react-icons/lu";
 import { axiosSendMessage } from "../../../API";
 import { isAxiosError } from "axios";
@@ -35,9 +35,14 @@ const MessageSendContainer = () => {
     }
   };
 
+  const handleSubmit = (e: KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    sendMessage();
+  };
+
   return (
     <div className="bg-slate-200 dark:bg-gray-950 w-full h-24 flex flow-row rounded-xl overflow-hidden">
-      <form className="w-5/6 h-20 ">
+      <form className="w-5/6 h-20 " onSubmit={() => handleSubmit}>
         <input
           placeholder="Your message..."
           type="text"
@@ -45,6 +50,7 @@ const MessageSendContainer = () => {
           className="px-4 bg-slate-200 w-full h-full focus:outline-none dark:bg-gray-950"
           value={content}
         />
+        <button type="submit" className="hidden" />
       </form>
       <button
         type="button"
