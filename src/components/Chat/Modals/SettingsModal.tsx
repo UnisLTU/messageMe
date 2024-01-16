@@ -12,14 +12,9 @@ const SettingsModal = () => {
   ) as DataContextProps;
 
   const handleClick = () => {
-    localStorage.theme === "dark" || !("theme" in localStorage)
-      ? document.documentElement.classList.add("dark")
-      : document.documentElement.classList.remove("dark");
-
     localStorage.theme === "dark"
       ? (localStorage.theme = "light")
       : (localStorage.theme = "dark");
-
     setIsDarkMode((prev) => !prev);
   };
 

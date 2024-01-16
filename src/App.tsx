@@ -2,18 +2,22 @@ import { Route, Routes } from "react-router-dom";
 import Chat from "./pages/Chat";
 import { Main } from "./pages/Main";
 import ErrorPage from "./ErrorPage";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import DataContext from "./context/DataContext";
+import { DataContextProps } from "./types/common";
 
 const App = () => {
-  useEffect(() => {
-    localStorage.theme === "dark" || !("theme" in localStorage)
-      ? document.documentElement.classList.add("dark")
-      : document.documentElement.classList.remove("dark");
+  const { isDarkMode } = useContext(DataContext) as DataContextProps;
 
-    localStorage.theme === "dark"
-      ? (localStorage.theme = "light")
-      : (localStorage.theme = "dark");
-  }, []);
+  useEffect(() => {
+    if (localStorage.theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else if (localStorage.theme === "light") {
+      document.documentElement.classList.remove("dark");
+    } else {
+      localStorage.theme = "dark";
+    }
+  }, [isDarkMode]);
 
   return (
     <div className="flex justify-center bg-gray-800 h-screen w-screen">
