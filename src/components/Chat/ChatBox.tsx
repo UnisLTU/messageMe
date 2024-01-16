@@ -62,7 +62,7 @@ const ChatBox = () => {
   return (
     <>
       {selectedChatId ? (
-        <div className="md:w-1/2 w-full h-full bg-slate-50 rounded-xl flex flex-col p-4">
+        <div className="md:w-1/2 w-full h-full bg-slate-50 dark:bg-gray-900 rounded-xl flex flex-col p-4 dark:text-white">
           <ChatName />
           <div className="h-full my-4 space-y-2 flex flex-col justify-end overflow-hidden">
             <div className="flex flex-col overflow-scroll no-scrollbar">
@@ -72,7 +72,7 @@ const ChatBox = () => {
           <MessageSendContainer />
         </div>
       ) : (
-        <div className="md:w-1/2 w-full bg-slate-50 rounded-xl justify-center items-center flex flex-col p-4 space-y-4">
+        <div className="md:w-1/2 w-full bg-slate-50 dark:bg-gray-900 rounded-xl justify-center items-center flex flex-col p-4 space-y-4 dark:text-white">
           <img className="h-64" src={SVG} alt="" />
           <h1 className="text-xl font-semibold">
             Select chat from list of chats

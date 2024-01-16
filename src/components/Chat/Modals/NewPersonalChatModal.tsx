@@ -48,8 +48,8 @@ const NewPersonalChatModal = () => {
   };
 
   return (
-    <div className="absolute flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.5)]">
-      <div className="bg-slate-50 w-[400px] h-1/3 rounded-xl flex flex-col relative items-center p-2 justify-between">
+    <div className="absolute flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.5)] dark:text-white">
+      <div className="bg-slate-50 dark:bg-gray-900 w-[400px] h-1/3 rounded-xl flex flex-col relative items-center p-2 justify-between">
         <h1 className="text-2xl">Start New Chat with person</h1>
         <div className="absolute top-0 right-0 p-2 cursor-pointer">
           <IoClose onClick={() => setModal(ModalsEnum.NOT_SHOW)} size={32} />
@@ -64,7 +64,7 @@ const NewPersonalChatModal = () => {
         <button
           onClick={() => handleNewChat()}
           disabled={!selectedUser}
-          className="bg-slate-200 disabled:bg-red-100 w-36 rounded-xl text-center p-2 mb-2"
+          className="bg-slate-200 disabled:bg-red-100 dark:bg-gray-950 dark:disabled:bg-gray-400 w-36 rounded-xl text-center p-2 mb-2"
         >
           Start chatting
         </button>

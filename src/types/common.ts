@@ -27,4 +27,6 @@ export interface DataContextProps {
   setGroupAdminId: Dispatch<SetStateAction<string>>;
   chatUsers: UserDataTypes[];
   setChatUsers: Dispatch<SetStateAction<UserDataTypes[]>>;
+  isDarkMode: boolean;
+  setIsDarkMode: Dispatch<SetStateAction<boolean>>;
 }

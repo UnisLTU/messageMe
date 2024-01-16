@@ -41,13 +41,13 @@ const SearchDropDown = ({ setSelectedUser }: SearchDropDownProps) => {
         placeholder="Search for person"
         type="text"
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="bg-slate-50 p-4 rounded-xl w-full"
+        className="bg-slate-50 p-4 rounded-xl w-full dark:bg-gray-950"
         value={searchQuery}
       />
       {!searchQuery ? (
         <></>
       ) : (
-        <div className="bg-slate-300 w-[300px] max-h-24 overflow-scroll absolute top-14 mt-2 p-2 space-y-2 rounded-xl no-scrollbar text-sm">
+        <div className="bg-slate-300 w-[300px] dark:bg-gray-950  max-h-24 overflow-scroll absolute top-14 mt-2 p-2 space-y-2 rounded-xl no-scrollbar text-sm">
           {searchResults.map(({ _id, name, email, pic }) => {
             return (
               <div

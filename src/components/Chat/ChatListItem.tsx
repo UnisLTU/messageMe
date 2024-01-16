@@ -60,7 +60,7 @@ export const ChatListItem = ({ chat }: ChatBannerProps) => {
   return (
     <div
       onClick={handleAccess}
-      className={`${background} rounded-xl h-16 shadow-md flex items-center flex-row space-x-4`}
+      className={`${background} rounded-xl h-16 shadow-md flex items-center flex-row space-x-4 dark:bg-gray-900`}
     >
       <img
         className="w-6 h-6 bg-blue-400 rounded-full ml-4"

@@ -17,7 +17,7 @@ export const ChatName = () => {
   const { senderName, senderPic } = selectedChatUser;
 
   return (
-    <div className="md:bg-slate-200 bg-slate-50 rounded-xl h-24 w-full flex flex-row justify-between items-center">
+    <div className="md:bg-slate-200 md:dark:bg-gray-900 bg-slate-50 dark:bg-gray-900 rounded-xl h-24 w-full flex flex-row justify-between items-center">
       <div className="flex items-center">
         <img
           className="bg-red-400 w-10 h-10 rounded-full mx-4"
@@ -30,7 +30,7 @@ export const ChatName = () => {
       </div>
       {userData?._id === groupAdminId ? (
         <button
-          className="mr-4"
+          className="mr-4 "
           onClick={() => setModal(ModalsEnum.GROUP_CHAT_SETTINGS)}
         >
           <CiSettings size={32} />
