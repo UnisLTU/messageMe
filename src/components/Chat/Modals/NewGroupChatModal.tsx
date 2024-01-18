@@ -70,10 +70,13 @@ const NewGroupChatModal = () => {
             onChange={(e) => setChatName(e.target.value)}
           />
         </label>
-        <SearchDropDown setSelectedUser={setSelectedUser} />
+        <SearchDropDown
+          setSelectedUser={setSelectedUser}
+          selectedUsersArray={selectedUsersArray}
+        />
         {selectedUsersArray &&
           selectedUsersArray.map((user) => (
-            <div className="flex space-x-4 items-center">
+            <div key={user._id} className="flex space-x-4 items-center">
               <img className="h-8 rounded-full" src={user.pic} alt="" />
               <h1>{user.name}</h1>
             </div>

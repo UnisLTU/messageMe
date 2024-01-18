@@ -28,8 +28,8 @@ const SettingsModal = () => {
         <div className="flex w-full p-4 space-x-4">
           <ImageUpload />
           <div className="flex w-1/2 justify-center items-center">
-            <div className="flex items-center w-full">
-              <h1>Dark mode:</h1>
+            <div className="flex justify-center items-center w-full">
+              <h1 className="pr-4">Dark mode:</h1>
               <button className="flex" onClick={handleClick}>
                 {isDarkMode ? (
                   <MdDarkMode size={32} />
