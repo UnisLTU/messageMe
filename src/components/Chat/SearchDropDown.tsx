@@ -6,9 +6,13 @@ import { DataContextProps } from "../../types/common";
 
 interface SearchDropDownProps {
   setSelectedUser: (user: UserDataTypes) => void;
+  selectedUsersArray?: UserDataTypes[];
 }
 
-const SearchDropDown = ({ setSelectedUser }: SearchDropDownProps) => {
+const SearchDropDown = ({
+  setSelectedUser,
+  selectedUsersArray,
+}: SearchDropDownProps) => {
   const { userData } = useContext(DataContext) as DataContextProps;
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -17,7 +21,15 @@ const SearchDropDown = ({ setSelectedUser }: SearchDropDownProps) => {
     const searchByName = async () => {
       try {
         const { data } = await axiosSearchUser(searchQuery);
-        setSearchResults(data);
+        if (selectedUsersArray) {
+          const usersArray = data.filter(
+            (item1: UserDataTypes) =>
+              !selectedUsersArray.some(
+                (item2: UserDataTypes) => item2._id === item1._id
+              )
+          );
+          setSearchResults(usersArray);
+        } else setSearchResults(data);
       } catch (error) {
         console.error(error);
       }
