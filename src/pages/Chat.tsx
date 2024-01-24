@@ -11,7 +11,7 @@ import NewGroupChatModal from "../components/Chat/Modals/NewGroupChatModal";
 import io from "socket.io-client";
 import { DataContextProps } from "../types/common";
 import { GroupChatSettingsModal } from "../components/Chat/Modals/GroupChatSettingsModal";
-export const socket = io("http://localhost:4000");
+export const socket = io("https://message-me-back.vercel.app:4000");
 
 export enum ModalsEnum {
   SETTINGS = "settings",
