@@ -8,7 +8,7 @@ import { ChatDataTypes } from "./types/ChatTypes";
 import { RenameGroupTypes } from "./components/Chat/Modals/GroupChatSettingsModal";
 
 const api = axios.create({
-  baseURL: "http://localhost:4000/api/", //API base URL
+  baseURL: "https://message-me-back.vercel.app/api", //API base URL
 });
 
 // Request interceptor for adding the bearer token
