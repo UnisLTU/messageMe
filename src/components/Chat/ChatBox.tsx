@@ -10,6 +10,7 @@ import { socket } from "./ChatListItem";
 import { deleteMessage, editMessage } from "../../utils/messageFunc";
 import { DataContextProps } from "../../types/common";
 import { MessageTypes } from "../../types/MessagesTypes";
+import { MessageEditTypes } from "./Messages/MessageEditFrom";
 
 const ChatBox = () => {
   const { selectedChatId, messages, setMessages } = useContext(
@@ -37,12 +38,12 @@ const ChatBox = () => {
         setMessages((messages) => [...messages, data]);
     };
 
-    const messageDeleteHandler = (data: string) => {
+    const messageDeleteHandler = (data: MessageEditTypes) => {
       const deletedMessageArray = deleteMessage(data, messages);
       setMessages(deletedMessageArray);
     };
 
-    const messageEditHandler = (data: string) => {
+    const messageEditHandler = (data: MessageEditTypes) => {
       const editedMessageArray = editMessage(data, messages);
       setMessages(editedMessageArray);
     };
