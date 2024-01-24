@@ -1,5 +1,13 @@
-export const deleteMessage = (data, messages) => {
-  const indexToRemove = messages.findIndex((obj) => obj._id === data._id);
+import { MessageEditTypes } from "../components/Chat/Messages/MessageEditFrom";
+import { MessageTypes } from "../types/MessagesTypes";
+
+export const deleteMessage = (
+  data: MessageEditTypes,
+  messages: MessageTypes[]
+) => {
+  const indexToRemove = messages.findIndex(
+    (obj: MessageEditTypes) => obj._id === data._id
+  );
   const newMessages = [...messages];
   if (indexToRemove !== -1) {
     newMessages[indexToRemove] = {
@@ -11,8 +19,13 @@ export const deleteMessage = (data, messages) => {
   return newMessages;
 };
 
-export const editMessage = (data, messages) => {
-  const indexToEdit = messages.findIndex((obj) => obj._id === data._id);
+export const editMessage = (
+  data: MessageEditTypes,
+  messages: MessageTypes[]
+) => {
+  const indexToEdit = messages.findIndex(
+    (obj: MessageEditTypes) => obj._id === data._id
+  );
   const newMessages = [...messages];
   if (indexToEdit !== -1) {
     newMessages[indexToEdit] = {
