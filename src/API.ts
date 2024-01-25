@@ -9,7 +9,7 @@ import { RenameGroupTypes } from "./components/Chat/Modals/GroupChatSettingsModa
 
 const api = axios.create({
   withCredentials: true,
-  baseURL: "https://messagemeback.onrender.com/api", //API base URL
+  baseURL: "https://mmb-cr6t.onrender.com/api", //API base URL
 });
 
 // Request interceptor for adding the bearer token
