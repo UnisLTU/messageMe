@@ -8,6 +8,7 @@ import { ChatDataTypes } from "./types/ChatTypes";
 import { RenameGroupTypes } from "./components/Chat/Modals/GroupChatSettingsModal";
 
 const api = axios.create({
+  withCredentials: true,
   baseURL: "https://messagemeback.onrender.com/api", //API base URL
 });
 
