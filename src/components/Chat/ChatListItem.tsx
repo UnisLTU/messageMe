@@ -5,7 +5,7 @@ import { ModalsEnum } from "../../pages/Chat";
 import io from "socket.io-client";
 import { DataContextProps } from "../../types/common";
 import { ChatDataTypes } from "../../types/ChatTypes";
-export const socket = io("https://mmb-cr6t.onrender.com:4000");
+export const socket = io("https://mmb-cr6t.onrender.com");
 
 interface ChatBannerProps {
   chat: ChatDataTypes;
