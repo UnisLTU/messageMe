@@ -7,9 +7,15 @@ import { MessageEditTypes } from "./components/Chat/Messages/MessageEditFrom";
 import { ChatDataTypes } from "./types/ChatTypes";
 import { RenameGroupTypes } from "./components/Chat/Modals/GroupChatSettingsModal";
 
+let baseURL;
+
+process.env.NODE_ENV === "production"
+  ? (baseURL = "https://mmb-cr6t.onrender.com/api")
+  : (baseURL = "http://localhost:4000/api");
+
 const api = axios.create({
   withCredentials: true,
-  baseURL: "https://mmb-cr6t.onrender.com/api", //API base URL
+  baseURL,
 });
 
 // Request interceptor for adding the bearer token

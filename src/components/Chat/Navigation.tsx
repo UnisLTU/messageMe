@@ -10,7 +10,7 @@ export const Navigation = () => {
 
   return (
     <div className="md:w-[10%] md:rounded-xl md:h-full md:flex-col md:relative absolute bottom-0 w-full min-h-fit bg-slate-50 dark:bg-gray-900 dark:text-white flex flex-row text-center items-center justify-around">
-      <div className="md:flex flex-col hidden items-center space-y-2">
+      <div className="md:flex flex-col hidden items-center space-y-2 object-contain">
         <img
           className="bg-slate-800 h-20 w-20 rounded-full border-blue-400 border-4"
           src={userData?.pic}
