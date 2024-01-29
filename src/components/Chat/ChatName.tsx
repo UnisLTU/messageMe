@@ -20,7 +20,7 @@ export const ChatName = () => {
     <div className="md:bg-slate-200 md:dark:bg-gray-900 bg-slate-50 dark:bg-gray-900 rounded-xl h-24 w-full flex flex-row justify-between items-center">
       <div className="flex items-center">
         <img
-          className="bg-red-400 w-10 h-10 rounded-full mx-4"
+          className="bg-red-400 w-10 h-10 rounded-full mx-4 object-cover"
           src={isGroupChat ? "" : senderPic}
           alt=""
         />

@@ -58,7 +58,7 @@ export const Message = ({ message }: MessageProps) => {
     <>
       <div className={`flex  py-4 rounded-xl ${styles} items-center`}>
         <img
-          className="mx-4 w-6 h-6 rounded-full"
+          className="mx-4 w-6 h-6 rounded-full object-cover"
           src={picture}
           alt="User avatar"
         />
