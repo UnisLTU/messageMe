@@ -8,10 +8,8 @@ import { axiosFetchChats } from "../API";
 import { isAxiosError } from "axios";
 import ChatBoxModal from "../components/Chat/Modals/ChatBoxModal";
 import NewGroupChatModal from "../components/Chat/Modals/NewGroupChatModal";
-import io from "socket.io-client";
 import { DataContextProps } from "../types/common";
 import { GroupChatSettingsModal } from "../components/Chat/Modals/GroupChatSettingsModal";
-export const socket = io("https://mmb-cr6t.onrender.com:4000");
 
 export enum ModalsEnum {
   SETTINGS = "settings",
