@@ -66,8 +66,7 @@ const MessageEditFrom = ({
         />
       </form>
       <button
-        type="button"
-        onClick={editMessageHandle}
+        type="submit"
         className="flex justify-center text-green-400 items-center"
       >
         <FaCheck size={16} />
