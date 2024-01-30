@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ChatName } from "./ChatName";
 import { isAxiosError } from "axios";
 import { axiosAllMessages } from "../../API";
@@ -11,13 +11,17 @@ import { deleteMessage, editMessage } from "../../utils/messageFunc";
 import { DataContextProps } from "../../types/common";
 import { MessageTypes } from "../../types/MessagesTypes";
 import { MessageEditTypes } from "./Messages/MessageEditFrom";
+import ChatNameSkeleton from "./ChatNameSkeleton";
+import AllMessagesSkeleton from "./AllMessagesSkeleton";
 
 const ChatBox = () => {
   const { selectedChatId, messages, setMessages } = useContext(
     DataContext
   ) as DataContextProps;
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     const allMessages = async () => {
       try {
         const { data } = await axiosAllMessages(selectedChatId);
@@ -26,6 +30,8 @@ const ChatBox = () => {
         if (isAxiosError(err)) {
           console.log(err);
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -64,10 +70,10 @@ const ChatBox = () => {
     <>
       {selectedChatId ? (
         <div className="md:w-1/2 w-full h-full bg-slate-50 dark:bg-gray-900 rounded-xl flex flex-col p-4 dark:text-white">
-          <ChatName />
+          {isLoading ? <ChatNameSkeleton /> : <ChatName />}
           <div className="h-full my-4 space-y-2 flex flex-col justify-end overflow-hidden">
             <div className="flex flex-col overflow-scroll no-scrollbar">
-              <AllMessagesContainer />
+              {isLoading ? <AllMessagesSkeleton /> : <AllMessagesContainer />}
             </div>
           </div>
           <MessageSendContainer />

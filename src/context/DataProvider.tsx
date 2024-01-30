@@ -24,6 +24,7 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [groupAdminId, setGroupAdminId] = useState("");
   const [chatUsers, setChatUsers] = useState<UserDataTypes[]>([]);
   const [isDarkMode, setIsDarkMode] = useState(localStorage.theme === "dark");
+  const [isLoadingList, setIsLoadingList] = useState(true);
 
   useEffect(() => {
     const storageUser = localStorage.getItem("userData");
@@ -62,6 +63,8 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
         setChatUsers,
         isDarkMode,
         setIsDarkMode,
+        isLoadingList,
+        setIsLoadingList,
       }}
     >
       {children}

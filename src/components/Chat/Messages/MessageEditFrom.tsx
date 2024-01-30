@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useState,
+  FormEvent,
+} from "react";
 import { FaCheck } from "react-icons/fa6";
 import { MdOutlineCancel } from "react-icons/md";
 import { isAxiosError } from "axios";
@@ -27,7 +33,8 @@ const MessageEditFrom = ({
   const { setMessages, messages } = useContext(DataContext) as DataContextProps;
   const [editedMessage, setEditedMessage] = useState("");
 
-  const editMessageHandle = async () => {
+  const editMessageHandle = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
       //send to backend
       const { data } = await axiosEditMessage({
@@ -48,7 +55,7 @@ const MessageEditFrom = ({
 
   return (
     <>
-      <form className="w-full">
+      <form className="w-full" onSubmit={editMessageHandle}>
         <input
           placeholder={messageContent}
           type="text"
@@ -60,9 +67,7 @@ const MessageEditFrom = ({
       </form>
       <button
         type="button"
-        onClick={() => {
-          editMessageHandle();
-        }}
+        onClick={editMessageHandle}
         className="flex justify-center text-green-400 items-center"
       >
         <FaCheck size={16} />

@@ -29,4 +29,6 @@ export interface DataContextProps {
   setChatUsers: Dispatch<SetStateAction<UserDataTypes[]>>;
   isDarkMode: boolean;
   setIsDarkMode: Dispatch<SetStateAction<boolean>>;
+  isLoadingList: boolean;
+  setIsLoadingList: Dispatch<SetStateAction<boolean>>;
 }

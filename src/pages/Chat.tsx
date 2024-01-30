@@ -21,9 +21,8 @@ export enum ModalsEnum {
 }
 
 const Chat = () => {
-  const { userData, setChats, setIsMobile, isMobile, modal } = useContext(
-    DataContext
-  ) as DataContextProps;
+  const { userData, setChats, setIsMobile, isMobile, modal, setIsLoadingList } =
+    useContext(DataContext) as DataContextProps;
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -33,6 +32,8 @@ const Chat = () => {
         setChats(data);
       } catch (err) {
         if (isAxiosError(err)) console.log(err);
+      } finally {
+        setIsLoadingList(false);
       }
     };
 

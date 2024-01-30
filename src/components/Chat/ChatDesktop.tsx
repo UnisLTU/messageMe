@@ -6,9 +6,12 @@ import { useContext } from "react";
 import ChatBox from "./ChatBox";
 import { ModalsEnum } from "../../pages/Chat";
 import { DataContextProps } from "../../types/common";
+import ChatListSkeleton from "./ChatListSkeleton";
 
 const ChatDesktop = () => {
-  const { chats, setModal } = useContext(DataContext) as DataContextProps;
+  const { chats, setModal, isLoadingList } = useContext(
+    DataContext
+  ) as DataContextProps;
 
   return (
     <>
@@ -30,14 +33,14 @@ const ChatDesktop = () => {
                     </button>
                   </div>
                   <div className="h-full w-full overflow-y-scroll no-scrollbar space-y-4">
-                    {chats ? (
+                    {chats && !isLoadingList ? (
                       chats
                         .filter(({ isGroupChat }) => !isGroupChat)
                         .map((chat) => (
                           <ChatListItem key={chat._id} chat={chat} />
                         ))
                     ) : (
-                      <div>Loading</div>
+                      <ChatListSkeleton />
                     )}
                   </div>
                 </div>
@@ -53,14 +56,14 @@ const ChatDesktop = () => {
                     </button>
                   </div>
                   <div className="h-full w-full overflow-y-scroll no-scrollbar space-y-4">
-                    {chats ? (
+                    {chats && !isLoadingList ? (
                       chats
                         .filter(({ isGroupChat }) => isGroupChat)
                         .map((chat) => (
                           <ChatListItem key={chat._id} chat={chat} />
                         ))
                     ) : (
-                      <div>Loading</div>
+                      <ChatListSkeleton />
                     )}
                   </div>
                 </div>

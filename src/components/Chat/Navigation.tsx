@@ -19,7 +19,7 @@ export const Navigation = () => {
         <h1 className="font-bold text-xl break-words">{userData?.name}</h1>
       </div>
       <div
-        className="h-24 w-24 flex flex-col items-center justify-center"
+        className="h-24 w-24 flex flex-col items-center justify-center cursor-pointer"
         onClick={() => setModal(ModalsEnum.SETTINGS)}
       >
         <IoSettingsOutline size={32} />
