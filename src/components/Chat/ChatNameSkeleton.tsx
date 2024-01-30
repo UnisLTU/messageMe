@@ -1,5 +1,3 @@
-import React from "react";
-
 const ChatNameSkeleton = () => {
   return (
     <div className="md:bg-slate-200 md:dark:bg-gray-900 bg-slate-50 dark:bg-gray-900 rounded-xl h-24 w-full flex flex-row justify-between items-center">

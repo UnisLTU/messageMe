@@ -1,5 +1,3 @@
-import React from "react";
-
 const ChatListSkeleton = () => {
   return (
     <div className="rounded-xl h-16 shadow-md flex items-center flex-row space-x-4 dark:bg-gray-900">
