@@ -55,7 +55,7 @@ const MessageEditFrom = ({
 
   return (
     <>
-      <form className="w-full" onSubmit={editMessageHandle}>
+      <form className="w-full flex space-x-4" onSubmit={editMessageHandle}>
         <input
           placeholder={messageContent}
           type="text"
@@ -64,22 +64,22 @@ const MessageEditFrom = ({
           }}
           className="px-4 bg-slate-200 dark:bg-gray-900 w-full h-full  focus:outline-none"
         />
+        <button
+          type="submit"
+          className="flex justify-center text-green-400 items-center"
+        >
+          <FaCheck size={16} />
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setIsEditMessage(false);
+          }}
+          className="flex justify-center text-red-400 items-center"
+        >
+          <MdOutlineCancel size={16} />
+        </button>
       </form>
-      <button
-        type="submit"
-        className="flex justify-center text-green-400 items-center"
-      >
-        <FaCheck size={16} />
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          setIsEditMessage(false);
-        }}
-        className="flex justify-center text-red-400 items-center"
-      >
-        <MdOutlineCancel size={16} />
-      </button>
     </>
   );
 };
