@@ -20,9 +20,13 @@ const NewGroupChatModal = () => {
     []
   );
 
-  const { setChats, setSelectedChatId, setModal } = useContext(
-    DataContext
-  ) as DataContextProps;
+  const {
+    setChats,
+    setSelectedChatId,
+    setModal,
+    setIsGroupChat,
+    setGroupChatName,
+  } = useContext(DataContext) as DataContextProps;
 
   useEffect(() => {
     if (
@@ -45,6 +49,8 @@ const NewGroupChatModal = () => {
       if (data) {
         setChats((prevChats) => [data, ...prevChats]);
         setSelectedChatId(data._id);
+        setIsGroupChat(true);
+        setGroupChatName(data.chatName);
       }
     } catch (err) {
       if (isAxiosError(err)) console.log(err);

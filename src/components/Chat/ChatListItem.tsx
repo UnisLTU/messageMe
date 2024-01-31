@@ -64,7 +64,11 @@ export const ChatListItem = ({ chat }: ChatBannerProps) => {
     >
       <img
         className="w-6 h-6 bg-blue-400 rounded-full ml-4"
-        src={isGroup ? "" : senderPic}
+        src={
+          isGroup
+            ? "https://icon-library.com/images/group-icon/group-icon-28.jpg"
+            : senderPic
+        }
         alt=""
       />
       <h1 className="shrink-0">{isGroup ? groupName : senderName}</h1>

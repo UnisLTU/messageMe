@@ -34,9 +34,12 @@ const NewPersonalChatModal = () => {
       if (data) {
         const doesChatExist = chats.some((item) => item._id === data._id);
         const sender = SendersInfo(userData, data);
+        console.log(sender);
 
-        if (doesChatExist) setSelectedChatUser(sender);
-        else setChats((prevChats) => [data, ...prevChats]);
+        if (!doesChatExist) {
+          setSelectedChatUser(sender);
+          setChats((prevChats) => [data, ...prevChats]);
+        } else setSelectedChatUser(sender);
 
         setSelectedChatId(data._id);
       }

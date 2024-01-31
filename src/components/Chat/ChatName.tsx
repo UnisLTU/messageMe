@@ -21,7 +21,11 @@ export const ChatName = () => {
       <div className="flex items-center">
         <img
           className="bg-red-400 w-10 h-10 rounded-full mx-4 object-cover"
-          src={isGroupChat ? "" : senderPic}
+          src={
+            isGroupChat
+              ? "https://icon-library.com/images/group-icon/group-icon-28.jpg"
+              : senderPic
+          }
           alt=""
         />
         <h1 className="font-semibold text-xl">
